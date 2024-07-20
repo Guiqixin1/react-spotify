@@ -1,0 +1,293 @@
+.top {
+  width: 20vw;
+  height: 20vh;
+  background-color: #121212;
+  margin: 10px auto;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+
+  .TopCol {
+    height: 6vh;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    span {
+      margin-left: 20px;
+    }
+  }
+}
+
+.bottom {
+  width: 20vw;
+  height: 80vh;
+  background-color: #121212;
+  margin: 10px auto;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 20px;
+  .card {
+    height: 45vh;
+    width: 18vw;
+    box-sizing: border-box;
+    .bottomCol {
+      height: 3vh;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      color: #a7a7a7;
+      line-height: 3vh;
+      img {
+        width: 20px;
+        font-size: large;
+      }
+      .plus {
+        margin-right: 20px;
+      }
+    }
+    .title {
+      font-size: 18px;
+    }
+    .btn {
+      width: 10vw;
+      height: 4vh;
+      line-height: 1vh;
+      border-radius: 20px;
+      color: #000000;
+      font-size: 1vw;
+      font-weight: 700;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    button:focus {
+      outline: none;
+      background-color: rgb(195, 195, 195);
+    }
+  }
+  .Playlists {
+    width: 18vw;
+    height: 3vh;
+    margin-top: 10px;
+    .PlaylistsBtn {
+      border-radius: 20px;
+      color: #fff;
+      background-color: #000000;
+    }
+    .close {
+      border-radius: 15px;
+      color: #fff;
+      background-color: #000000;
+    }
+  }
+  .search {
+    width: 18vw;
+    height: 3vh;
+    position: relative;
+    margin-top: 20px;
+    img {
+      width: 26px;
+      height: 26px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 5px;
+      box-sizing: border-box;
+      cursor: pointer;
+    }
+    img:hover {
+      background-color: #939393;
+      border-radius: 50%;
+    }
+    input {
+      width: 10vw;
+      height: 3vh;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      background-color: #272727; // 这是暗灰色
+      color: hsla(0, 0%, 100%); // 这是输入文字的颜色
+      padding-left: 28px;
+      border-radius: 10px;
+    }
+    input:focus {
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .searchBtn {
+      width: 6vw;
+      font-size: 16px;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: #121212;
+      color: #838181;
+    }
+    .searchBtn:hover {
+      color: #fff;
+    }
+  }
+}
+
+.header {
+  // position: relative;
+  width: 100%;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  margin-top: 10vh;
+  .flexItem {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    .title {
+      width: 100%;
+      height: 4vw;
+      position: relative;
+      margin-bottom: 0.5vw;
+      .h1 {
+        width: 50%;
+        position: absolute;
+        top: 0;
+        left: 1vw;
+        height: 100%;
+        text-align: left;
+        font-size: 20px;
+        font-weight: 900;
+        cursor: pointer;
+        color: #fff;
+      }
+      .showAll {
+        width: 50%;
+        position: absolute;
+        top: 0;
+        right: 2vw;
+        height: 100%;
+        text-align: right;
+        font-size: 13px;
+        font-weight: 600;
+        color: #a7a7a7;
+        cursor: pointer;
+      }
+      .showAll {
+        width: 50%;
+        position: absolute;
+        top: 0;
+        right: 2vw;
+        height: 100%;
+        text-align: right;
+        font-size: 13px;
+        font-weight: 600;
+        color: #a7a7a7;
+        cursor: pointer;
+      }
+    }
+    .item {
+      width: 25%;
+      height: 30vh;
+      padding: 1vw;
+      box-sizing: border-box;
+      position: relative;
+      .box {
+        width: 100%;
+        height: 120%;
+        .music-card {
+          width: 100%;
+          height: 100%;
+          display: block;
+          position: relative;
+
+          cursor: pointer;
+          .music-card__image {
+            width: 100%;
+            height: 70%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            object-fit: cover;
+          }
+          .music-card__info {
+            width: 100%;
+            height: 30%;
+            position: absolute;
+            top: 73%;
+            left: 0;
+            padding: 5px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            .music-card__title,
+            .music-card__description {
+              position: absolute;
+              left: 0;
+              display: block;
+              line-height: 30%;
+            }
+            .music-card__title {
+              font-size: 16px;
+              font-weight: 600;
+              color: #ffffff;
+              top: 10%;
+              height: 30%;
+            }
+
+            .music-card__description {
+              color: #c7c7c7;
+              font-size: 14px;
+              font-weight: 400;
+              top: 35%;
+              line-height: 100%;
+              height: 50%;
+              text-align: left;
+              white-space: wrap;
+            }
+          }
+        }
+      }
+    }
+    .item {
+      position: relative;
+      .broadcast {
+        width: 2.5vw;
+        height: 2.5vw;
+        position: absolute;
+        bottom: 4vw;
+        right: 2vw;
+        border-radius: 50%;
+        background-color: #00ff6e;
+        display: none;
+      }
+      .broadcast::after {
+        content: '';
+        position: absolute;
+        top: 50%; /* 控制三角形的位置 */
+        left: 50%; /* 控制三角形的位置 */
+        transform: translate(-50%, -50%) rotate(90deg);
+        width: 0;
+        height: 0;
+        border-left: 12px solid transparent; /* 控制三角形的大小 */
+        border-right: 12px solid transparent; /* 控制三角形的大小 */
+        border-bottom: 14px solid #000000; /* 控制三角形的大小和颜色 */
+      }
+      .broadcast:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+      }
+    }
+    .item:hover {
+      .broadcast {
+        display: block;
+      }
+    }
+    .item:hover::before {
+      display: block;
+    }
+  }
+}

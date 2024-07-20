@@ -1,0 +1,30 @@
+.login-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #414141;
+  box-sizing: border-box;
+  h1 {
+    color: #fff;
+    padding-top: 5vh;
+    margin-bottom: 5vh;
+    text-align: center;
+    font-size: 5vw;
+    box-sizing: border-box;
+  }
+
+  .login {
+    width: 30vw;
+    height: 50vh;
+    // background-color: #9facf485;
+    border-radius: 10px;
+    margin: 10vh auto;
+    box-sizing: border-box;
+    padding-top: 10vh;
+    text-align: center;
+    button {
+      width: 10vw;
+      height: 10vh;
+      border-radius: 10px;
+    }
+  }
+}
