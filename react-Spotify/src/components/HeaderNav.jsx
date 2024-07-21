@@ -5,12 +5,25 @@ import { useNavigate } from 'react-router-dom';
 
 import Button from './Button.jsx';
 
-export default function HeaderNav({ handleData, show }) {
+export default function HeaderNav({ handleData, show, flag }) {
   const navigate = useNavigate();
-
   function handleClick(value) {
     handleData(value);
   }
+
+  const headerStyle = {
+    width: flag ? '58vw' : '79vw',
+    height: '13vh',
+    background: 'linear-gradient(to right, #666, #333)',
+    display: 'flex',
+    boxSizing: 'border-box',
+    paddingTop: '10px',
+    flexWrap: 'wrap',
+    zIndex: '100',
+    position: 'absolute',
+    top: '0',
+    left: '21vw'
+  };
 
   return (
     <div style={headerStyle}>
@@ -54,23 +67,8 @@ export default function HeaderNav({ handleData, show }) {
   );
 }
 
-const headerStyle = {
-  width: '57.4vw',
-  height: '13vh',
-  background: 'linear-gradient(to right, #666, #333)',
-  display: 'flex',
-  boxSizing: 'border-box',
-  paddingTop: '10px',
-  // 换行
-  flexWrap: 'wrap',
-  zIndex: '100',
-  position: 'absolute',
-  top: '0',
-  left: '21vw'
-};
-
 const imgStyle = {
-  width: '12px',
+  width: '1.2vw', // 使用相对单位
   boxSizing: 'border-box'
 };
 

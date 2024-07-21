@@ -6,7 +6,7 @@ import { message } from 'antd';
 const useAxiosInterceptor = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { token } = useSelector(state => state.useReducer);
+  const { token } = useSelector(state => state.persistedUseReducer);
 
   const instance = axios.create({
     baseURL: 'https://api.spotify.com/v1',
@@ -41,7 +41,9 @@ const useAxiosInterceptor = () => {
       if (error.response && error.response.status === 401) {
         dispatch(setToken(''));
         // 弹出提醒用户重新登录的模态框
-        showLoginModal();
+        showMessageOnce();
+        navigate('/login');
+        return;
       }
       return Promise.reject(error);
     }
@@ -49,10 +51,7 @@ const useAxiosInterceptor = () => {
 
   const showLoginModal = () => {
     // 显示登录模态框的代码
-    console.log('显示登录模态框');
-    message.error('登录已过期,请重新登录', 5, () => {
-      navigate('/login');
-    });
+    message.error('登录已过期,请重新登录');
   };
 
   return instance;

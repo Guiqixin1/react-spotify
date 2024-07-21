@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MusicCard = ({ url, title, description, type }) => {
+const MusicCard = ({ url, title, description }) => {
   return (
     <div className="box">
       <div className="music-card">

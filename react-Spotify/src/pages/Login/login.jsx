@@ -11,6 +11,9 @@ const SpotifyAuth = () => {
     const params = getHashParams();
     setAccessToken(params.access_token);
     dispatch(setToken(params.access_token));
+
+    // 清除地址栏中的 token 信息
+    window.history.replaceState({}, document.title, '/');
   }, [dispatch]);
 
   const getHashParams = () => {

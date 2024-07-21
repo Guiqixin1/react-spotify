@@ -1,5 +1,3 @@
-import './index.scss';
-import HeaderNav from '@/components/HeaderNav.jsx';
 const contentStyle = {
   textAlign: 'center',
   minHeight: '75vh',
@@ -7,7 +5,7 @@ const contentStyle = {
   color: '#fff',
   overflowY: 'scroll',
   backgroundColor: '#1C1C1C',
-  width: '58vw'
+  dispalay: 'flex'
 };
 
 const siderStyle = {
@@ -20,84 +18,103 @@ const siderStyle = {
 
 const layoutStyle = {
   borderRadius: 8,
-  // overflow: "hidden",
   width: '100vw',
   height: '90vh',
   backgroundColor: '#000000'
 };
-import { Flex, Layout, Col, Row, Card } from 'antd';
+
+import './index.scss';
+import HeaderNav from '@/components/HeaderNav.jsx';
+import { Flex, Layout, Col, Row, Card, Button } from 'antd';
 // 按需引入antd图标
-import { SpotifyFilled, BankFilled, SearchOutlined } from '@ant-design/icons';
+import {
+  SpotifyFilled,
+  BankFilled,
+  SearchOutlined,
+  CloseCircleFilled,
+  PlusCircleOutlined,
+  CheckOutlined,
+  CaretRightFilled
+} from '@ant-design/icons';
 import arrow from '@/assets/arrow.png';
 import stack from '@/assets/stack.png';
 import plus from '@/assets/plus.png';
 import Search from '@/assets/search.png';
 import queue from '@/assets/queue.png';
+import React from 'react';
 
 // 引入Effect在页面挂载后执行
 import { useEffect, useState, useRef } from 'react';
 // 引入useLocation
 import { useLocation } from 'react-router-dom';
-
-const { Sider, Content } = Layout;
-
+const { Sider, Content, Header } = Layout;
 // 引入api接口
 import { useApiClient } from '../../utils/api.jsx';
-
 import MusicCard from '../../components/MusicCard';
-
-// 引入请求头更新函数
-// import { updateToken } from '../../utils/request';
-
 // 引入音乐播放器
 import MusicPlayer from '../../components/MusicPlayer';
+// 引入detail
+import Detail from '@/pages/Detail/detail.jsx';
+import { Route, Routes } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+
+// 右侧样式照片
+import img from '@/assets/img5.jpg';
 
 // 组件
 const Home = () => {
-  const location = useLocation();
-  const {
-    getSeveralArtists,
-    getSeveralAlbums,
-    getUserToptracks,
-    getSeveralShows,
-    getRecommendationPlaylists
-  } = useApiClient();
-  // 首页内容的数组
-  const [artistsInfoArrary, setArtistsInfoArrary] = useState([]);
-  const [albumsInfoArrary, setAlbumsInfoArrary] = useState([]);
-  const [userTopTracks, setUserTopTracks] = useState([]);
-  const [showsEpisodes, setshowsEpisodes] = useState([]);
-  const [hotPlayLists, setHotPlayLists] = useState([]);
-  let accessToken = '';
-  useEffect(() => {
-    if (location.hash) {
-      const urlParams = new URLSearchParams(location.hash.substring(1)); // 使用substring替代了substr
-      accessToken = urlParams.get('access_token');
-      // updateToken(accessToken);
-      getHomeContent();
-    }
-  }, [location]);
+  // const location = useLocation();
+  // const {
+  //   getSeveralArtists,
+  //   getSeveralAlbums,
+  //   getUserToptracks,
+  //   getSeveralShows,
+  //   getRecommendationPlaylists
+  // } = useApiClient();
+  // // 首页内容的数组
+  // const [artistsInfoArrary, setArtistsInfoArrary] = useState([]);
+  // const [albumsInfoArrary, setAlbumsInfoArrary] = useState([]);
+  // const [userTopTracks, setUserTopTracks] = useState([]);
+  // const [showsEpisodes, setshowsEpisodes] = useState([]);
+  // const [hotPlayLists, setHotPlayLists] = useState([]);
+  // let accessToken = '';
+  // useEffect(() => {
+  //   getHomeContent();
+  // }, [location]);
+
   // 首页的内容获取
-
-  async function getHomeContent() {
-    const artits = await getSeveralArtists();
-    const albums = await getSeveralAlbums();
-    const userTopTracks = await getUserToptracks();
-    const shows = await getSeveralShows();
-    const hotSongs = await getRecommendationPlaylists('37i9dQZEVXbNG2KDcFcKOF');
-    const hotFastSongs = await getRecommendationPlaylists(
-      '37i9dQZEVXbLiRSasKsNU9'
-    );
-    const hotSongArray = [];
-    hotSongArray.push(hotSongs.data, hotFastSongs.data);
-    setHotPlayLists(hotSongArray);
-    setshowsEpisodes(shows.data.shows);
-    setArtistsInfoArrary(artits.data.artists);
-    setAlbumsInfoArrary(albums.data.albums);
-    setUserTopTracks(userTopTracks.data.items);
-  }
-
-  // playlists标识符
+  // async function getHomeContent() {
+  //   const artits = await getSeveralArtists();
+  //   const albums = await getSeveralAlbums();
+  //   const userTopTracks = await getUserToptracks();
+  //   const shows = await getSeveralShows();
+  //   const hotSongs = await getRecommendationPlaylists('37i9dQZEVXbNG2KDcFcKOF');
+  //   const hotFastSongs = await getRecommendationPlaylists(
+  //     '37i9dQZEVXbLiRSasKsNU9'
+  //   );
+  //   const dailyRecommendation1 = await getRecommendationPlaylists(
+  //     '37i9dQZF1E35Asb7SMuWG2'
+  //   );
+  //   const dailyRecommendation2 = await getRecommendationPlaylists(
+  //     '37i9dQZF1E39vKbmddook8'
+  //   );
+  //   const hotSongArray = [];
+  //   hotSongArray.push(
+  //     hotSongs.data,
+  //     hotFastSongs.data,
+  //     dailyRecommendation1.data,
+  //     dailyRecommendation2.data
+  //   );
+  //   setHotPlayLists(hotSongArray);
+  //   setshowsEpisodes(shows.data.shows);
+  //   setArtistsInfoArrary(artits.data.artists);
+  //   setAlbumsInfoArrary(albums.data.albums);
+  //   setUserTopTracks(userTopTracks.data.items);
+  // }
+  // 判断是否加入歌单
+  const [checked, setChecked] = useState(false);
+  let accessToken = '';
+  // playlists标识符;
   const [ifPlayList, setIfPlayLists] = useState(false);
   // 点击搜索图片出现输入款，进行在表单内的搜搜
   const inputRef = useRef(null);
@@ -115,6 +132,9 @@ const Home = () => {
       setShow(value);
     }
   }
+
+  // 判断右侧导航是否出现的标识
+  const [showRightNav, setShowRightNav] = useState(false);
 
   return (
     <Flex gap="middle" wrap>
@@ -216,11 +236,17 @@ const Home = () => {
             </div>
           </div>
         </Sider>
-        <Layout>
+
+        {/* <Layout>
           <Content style={contentStyle}>
             <div className="header">
-              <HeaderNav handleData={handleData} show={show}></HeaderNav>
+              <HeaderNav
+                handleData={handleData}
+                show={show}
+                flag={showRightNav}
+              ></HeaderNav>
             </div>
+
             {show === 'all' && (
               <div className="container">
                 <div className="audiobook flexItem">
@@ -381,8 +407,82 @@ const Home = () => {
               </div>
             )}
           </Content>
-        </Layout>
-        <Sider width="21%"></Sider>
+        </Layout> */}
+
+        <Outlet />
+
+        <div className="rightNav">
+          <div className="header">
+            <div className="title">
+              <h1>spotifssssssssssssssssssssssssssssssy</h1>
+              <div className="close">
+                <CloseCircleFilled />
+              </div>
+            </div>
+          </div>
+          <div className="main">
+            <div className="ablum">
+              <MusicCard
+                url={img}
+                title={'每日推荐'}
+                description={'sdashjdiosahdioashdiohasidhssas'}
+              ></MusicCard>
+              <div className="plus">
+                <Button
+                  type="dashed"
+                  shape="circle"
+                  icon={checked ? <CheckOutlined /> : <PlusCircleOutlined />}
+                />
+              </div>
+            </div>
+            <div className="artist">
+              <MusicCard
+                url={img}
+                title={'每日推荐'}
+                description={'sdashjdiosahdioashdiohasidhssas'}
+              ></MusicCard>
+              <div className="plus">
+                <Button
+                  type="dashed"
+                  shape="circle"
+                  icon={checked ? <CheckOutlined /> : <PlusCircleOutlined />}
+                />
+              </div>
+            </div>
+            <div className="playlist">
+              <Card
+                style={{
+                  width: '21vw',
+                  height: '150px',
+                  marginTop: '10px',
+                  backgroundColor: '#5d5d5d',
+                  boxSizing: 'border-box',
+                  border: 'none'
+                }}
+              >
+                <div className="title">
+                  <h1>队列中的下一首歌</h1>
+                  <Button type="text" className="btn">
+                    打开队列
+                  </Button>
+                </div>
+                <div className="music">
+                  <Button
+                    type="text"
+                    icon={<CaretRightFilled />}
+                    shape="circle"
+                    className="btn"
+                  ></Button>
+                  <img src={img} className="music_img" alt="" />
+                  <div className="info">
+                    <h1 className="music_name">歌曲名称</h1>
+                    <h1 className="music_singer">歌手名称</h1>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
       </Layout>
 
       <div>

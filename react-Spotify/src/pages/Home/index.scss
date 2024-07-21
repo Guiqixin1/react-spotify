@@ -131,8 +131,7 @@
 }
 
 .header {
-  // position: relative;
-  width: 100%;
+  height: 30px;
 }
 .container {
   width: 100%;
@@ -288,6 +287,224 @@
     }
     .item:hover::before {
       display: block;
+    }
+  }
+}
+
+.rightNav {
+  width: 21vw;
+  height: 90vh;
+  position: absolute;
+  background-color: #4d4d4d;
+  right: 0;
+  box-sizing: border-box;
+  padding: 4px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 0;
+  margin-right: 4px;
+  // display: none;
+  .header {
+    width: 100%;
+    height: 60px;
+    background-color: #4d4d4d;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    .title {
+      height: 100%;
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0 auto;
+      position: relative;
+      box-sizing: border-box;
+      padding: 15px 10px;
+      background-color: #4d4d4d;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+
+      h1 {
+        width: 80%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .close {
+        position: absolute;
+        right: 10px;
+        top: 15px;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+  }
+  .main {
+    width: 94%;
+    margin: 0 auto;
+    border-radius: 10px;
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .box {
+      width: 100%;
+      height: 120%;
+      .music-card {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: relative;
+
+        cursor: pointer;
+        .music-card__image {
+          width: 100%;
+          height: 80%;
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          object-fit: cover;
+        }
+        .music-card__info {
+          width: 100%;
+          height: 30%;
+          position: absolute;
+          top: 83%;
+          left: 0;
+          padding: 5px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          .music-card__title,
+          .music-card__description {
+            position: absolute;
+            left: 0;
+            display: block;
+            line-height: 30%;
+          }
+          .music-card__title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #ffffff;
+            top: 10%;
+            height: 30%;
+          }
+
+          .music-card__description {
+            color: #c7c7c7;
+            font-size: 19px;
+            font-weight: 600;
+            top: 35%;
+            line-height: 100%;
+            height: 50%;
+            text-align: left;
+            white-space: wrap;
+          }
+        }
+      }
+    }
+    .plus {
+      font-size: 20px;
+      color: #fff;
+      position: absolute;
+      bottom: -40px;
+      right: 10px;
+      border-radius: 50%;
+    }
+    .ablum {
+      width: 21vw;
+      height: 400px;
+      padding: 10px;
+      position: relative;
+      margin-bottom: 55px;
+    }
+    .artist {
+      width: 21vw;
+      height: 350px;
+      padding: 10px;
+      position: relative;
+      margin-bottom: 55px;
+    }
+    .playlist {
+      width: 21vw;
+      height: 150px;
+      .title {
+        font-size: 16px;
+        font-weight: 600;
+        width: 100%;
+        height: 50px;
+        h1 {
+          float: left;
+          margin: 0;
+          padding: 0;
+          color: #fff;
+          text-align: left;
+        }
+        .btn {
+          float: right;
+          margin: 0;
+          padding: 0;
+          color: #fff;
+          text-align: right;
+        }
+      }
+      .music {
+        width: 100%;
+        height: 70px;
+        line-height: 50px;
+        display: flex;
+        align-items: center;
+        background-color: #7d7d7d;
+        .btn {
+          width: 30px;
+          height: 30px;
+          color: #fff;
+          margin-left: 10px;
+          font-size: 20px;
+          text-align: center;
+          line-height: 30px;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+        .music_img {
+          width: 70px;
+          height: 50px;
+          margin-left: 10px;
+        }
+        .info {
+          height: 50px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          margin-left: 10px;
+          color: #c7c7c7;
+          box-sizing: border-box;
+          .music_name {
+            height: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            box-sizing: border-box;
+            line-height: 25px;
+          }
+          .music_singer {
+            height: 25px;
+            line-height: 25px;
+            font-size: 12px;
+            box-sizing: border-box;
+          }
+        }
+      }
     }
   }
 }
