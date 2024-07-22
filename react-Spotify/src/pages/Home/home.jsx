@@ -5,7 +5,12 @@ const contentStyle = {
   color: '#fff',
   overflowY: 'scroll',
   backgroundColor: '#1C1C1C',
-  dispalay: 'flex'
+  dispalay: 'flex',
+  // Width: '79vw',
+  // 不换行
+  flexWrap: 'nowrap',
+  marginRight: '5px',
+  boxSizing: 'border-box'
 };
 
 const siderStyle = {
@@ -13,14 +18,16 @@ const siderStyle = {
   backgroundColor: '#000000',
   overflow: 'hidden',
   height: '90vh',
-  boxSizing: 'border-box'
+  boxSizing: 'border-box',
+  flexWrap: 'nowrap'
 };
 
 const layoutStyle = {
   borderRadius: 8,
   width: '100vw',
   height: '90vh',
-  backgroundColor: '#000000'
+  backgroundColor: '#000000',
+  display: 'flex'
 };
 
 import './index.scss';
@@ -63,54 +70,6 @@ import img from '@/assets/img5.jpg';
 
 // 组件
 const Home = () => {
-  // const location = useLocation();
-  // const {
-  //   getSeveralArtists,
-  //   getSeveralAlbums,
-  //   getUserToptracks,
-  //   getSeveralShows,
-  //   getRecommendationPlaylists
-  // } = useApiClient();
-  // // 首页内容的数组
-  // const [artistsInfoArrary, setArtistsInfoArrary] = useState([]);
-  // const [albumsInfoArrary, setAlbumsInfoArrary] = useState([]);
-  // const [userTopTracks, setUserTopTracks] = useState([]);
-  // const [showsEpisodes, setshowsEpisodes] = useState([]);
-  // const [hotPlayLists, setHotPlayLists] = useState([]);
-  // let accessToken = '';
-  // useEffect(() => {
-  //   getHomeContent();
-  // }, [location]);
-
-  // 首页的内容获取
-  // async function getHomeContent() {
-  //   const artits = await getSeveralArtists();
-  //   const albums = await getSeveralAlbums();
-  //   const userTopTracks = await getUserToptracks();
-  //   const shows = await getSeveralShows();
-  //   const hotSongs = await getRecommendationPlaylists('37i9dQZEVXbNG2KDcFcKOF');
-  //   const hotFastSongs = await getRecommendationPlaylists(
-  //     '37i9dQZEVXbLiRSasKsNU9'
-  //   );
-  //   const dailyRecommendation1 = await getRecommendationPlaylists(
-  //     '37i9dQZF1E35Asb7SMuWG2'
-  //   );
-  //   const dailyRecommendation2 = await getRecommendationPlaylists(
-  //     '37i9dQZF1E39vKbmddook8'
-  //   );
-  //   const hotSongArray = [];
-  //   hotSongArray.push(
-  //     hotSongs.data,
-  //     hotFastSongs.data,
-  //     dailyRecommendation1.data,
-  //     dailyRecommendation2.data
-  //   );
-  //   setHotPlayLists(hotSongArray);
-  //   setshowsEpisodes(shows.data.shows);
-  //   setArtistsInfoArrary(artits.data.artists);
-  //   setAlbumsInfoArrary(albums.data.albums);
-  //   setUserTopTracks(userTopTracks.data.items);
-  // }
   // 判断是否加入歌单
   const [checked, setChecked] = useState(false);
   let accessToken = '';
@@ -137,7 +96,7 @@ const Home = () => {
   const [showRightNav, setShowRightNav] = useState(false);
 
   return (
-    <Flex gap="middle" wrap>
+    <Flex gap="middle">
       <Layout className="layoutStyle" style={layoutStyle}>
         <Sider width="21%" style={siderStyle}>
           <div className="top">
@@ -408,81 +367,83 @@ const Home = () => {
             )}
           </Content>
         </Layout> */}
-
-        <Outlet />
-
-        <div className="rightNav">
-          <div className="header">
-            <div className="title">
-              <h1>spotifssssssssssssssssssssssssssssssy</h1>
-              <div className="close">
-                <CloseCircleFilled />
-              </div>
-            </div>
-          </div>
-          <div className="main">
-            <div className="ablum">
-              <MusicCard
-                url={img}
-                title={'每日推荐'}
-                description={'sdashjdiosahdioashdiohasidhssas'}
-              ></MusicCard>
-              <div className="plus">
-                <Button
-                  type="dashed"
-                  shape="circle"
-                  icon={checked ? <CheckOutlined /> : <PlusCircleOutlined />}
-                />
-              </div>
-            </div>
-            <div className="artist">
-              <MusicCard
-                url={img}
-                title={'每日推荐'}
-                description={'sdashjdiosahdioashdiohasidhssas'}
-              ></MusicCard>
-              <div className="plus">
-                <Button
-                  type="dashed"
-                  shape="circle"
-                  icon={checked ? <CheckOutlined /> : <PlusCircleOutlined />}
-                />
-              </div>
-            </div>
-            <div className="playlist">
-              <Card
-                style={{
-                  width: '21vw',
-                  height: '150px',
-                  marginTop: '10px',
-                  backgroundColor: '#5d5d5d',
-                  boxSizing: 'border-box',
-                  border: 'none'
-                }}
-              >
-                <div className="title">
-                  <h1>队列中的下一首歌</h1>
-                  <Button type="text" className="btn">
-                    打开队列
-                  </Button>
+        <Content style={contentStyle}>
+          <Outlet />
+        </Content>
+        <Sider width="21%" style={siderStyle}>
+          <div className="rightNav">
+            <div className="header">
+              <div className="title">
+                <h1>spotifssssssssssssssssssssssssssssssy</h1>
+                <div className="close">
+                  <CloseCircleFilled />
                 </div>
-                <div className="music">
+              </div>
+            </div>
+            <div className="main">
+              <div className="ablum">
+                <MusicCard
+                  url={img}
+                  title={'每日推荐'}
+                  description={'sdashjdiosahdioashdiohasidhssas'}
+                ></MusicCard>
+                <div className="plus">
                   <Button
-                    type="text"
-                    icon={<CaretRightFilled />}
+                    type="dashed"
                     shape="circle"
-                    className="btn"
-                  ></Button>
-                  <img src={img} className="music_img" alt="" />
-                  <div className="info">
-                    <h1 className="music_name">歌曲名称</h1>
-                    <h1 className="music_singer">歌手名称</h1>
-                  </div>
+                    icon={checked ? <CheckOutlined /> : <PlusCircleOutlined />}
+                  />
                 </div>
-              </Card>
+              </div>
+              <div className="artist">
+                <MusicCard
+                  url={img}
+                  title={'每日推荐'}
+                  description={'sdashjdiosahdioashdiohasidhssas'}
+                ></MusicCard>
+                <div className="plus">
+                  <Button
+                    type="dashed"
+                    shape="circle"
+                    icon={checked ? <CheckOutlined /> : <PlusCircleOutlined />}
+                  />
+                </div>
+              </div>
+              <div className="playlist">
+                <Card
+                  style={{
+                    width: '21vw',
+                    height: '150px',
+                    marginTop: '10px',
+                    backgroundColor: '#5d5d5d',
+                    boxSizing: 'border-box',
+                    border: 'none'
+                  }}
+                >
+                  <div className="title">
+                    <h1>队列中的下一首歌</h1>
+                    <Button type="text" className="btn">
+                      打开队列
+                    </Button>
+                  </div>
+                  <div className="music">
+                    <Button
+                      type="text"
+                      icon={<CaretRightFilled />}
+                      shape="circle"
+                      className="btn"
+                    ></Button>
+                    <img src={img} className="music_img" alt="" />
+                    <div className="info">
+                      <h1 className="music_name">歌曲名称</h1>
+                      <h1 className="music_singer">歌手名称</h1>
+                    </div>
+                  </div>
+                </Card>
+              </div>
             </div>
           </div>
-        </div>
+        </Sider>
       </Layout>
 
       <div>

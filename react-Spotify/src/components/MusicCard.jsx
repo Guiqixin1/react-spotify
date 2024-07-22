@@ -1,8 +1,8 @@
 import React from 'react';
 
-const MusicCard = ({ url, title, description }) => {
+const MusicCard = ({ url, title, description, onClick }) => {
   return (
-    <div className="box">
+    <div className="box" onClick={onClick}>
       <div className="music-card">
         <img className="music-card__image" src={url} alt="Album cover" />
         <div className="music-card__info">

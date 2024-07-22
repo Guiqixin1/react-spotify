@@ -12,7 +12,8 @@ export default function HeaderNav({ handleData, show, flag }) {
   }
 
   const headerStyle = {
-    width: flag ? '58vw' : '79vw',
+    // width: flag ? '58vw' : '79vw',
+    width: '57vw',
     height: '13vh',
     background: 'linear-gradient(to right, #666, #333)',
     display: 'flex',
@@ -22,7 +23,8 @@ export default function HeaderNav({ handleData, show, flag }) {
     zIndex: '100',
     position: 'absolute',
     top: '0',
-    left: '21vw'
+    left: '21vw',
+    boxSizing: 'border-box'
   };
 
   return (

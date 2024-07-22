@@ -7,7 +7,6 @@ const useAxiosInterceptor = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { token } = useSelector(state => state.persistedUseReducer);
-
   const instance = axios.create({
     baseURL: 'https://api.spotify.com/v1',
     timeout: 10000,
@@ -26,6 +25,7 @@ const useAxiosInterceptor = () => {
     },
     error => {
       // 对请求错误做些什么
+      setLoding(false);
       return Promise.reject(error);
     }
   );
@@ -41,7 +41,7 @@ const useAxiosInterceptor = () => {
       if (error.response && error.response.status === 401) {
         dispatch(setToken(''));
         // 弹出提醒用户重新登录的模态框
-        showMessageOnce();
+        showLoginModal();
         navigate('/login');
         return;
       }
@@ -54,7 +54,7 @@ const useAxiosInterceptor = () => {
     message.error('登录已过期,请重新登录');
   };
 
-  return instance;
+  return { instance };
 };
 
 export default useAxiosInterceptor;

@@ -1,0 +1,123 @@
+.Playlist {
+  width: 100%;
+  height: 90vh;
+  background-color: #3d3d3d;
+
+  .head {
+    width: 100%;
+    height: 3vw;
+    background-color: #5e5d5d;
+    display: flex;
+    position: sticky;
+    top: 0%;
+    left: 0%;
+    .arrow {
+      width: 5vw;
+      height: 3vw;
+      line-height: 3vw;
+      font-size: 18px;
+      margin-left: 20px;
+    }
+    .btn {
+      position: relative;
+      width: 3vw;
+      height: 3vw;
+      margin-left: 6px;
+      box-sizing: border-box;
+      //   display: none;
+      .broadcast {
+        width: 2.5vw;
+        height: 2.5vw;
+        border-radius: 50%;
+        background-color: rgb(15, 219, 15);
+        position: relative;
+        margin-top: 0.25vw;
+      }
+      .broadcast::after {
+        content: '';
+        position: absolute;
+        top: 50%; /* 控制三角形的位置 */
+        left: 50%; /* 控制三角形的位置 */
+        transform: translate(-50%, -50%) rotate(90deg);
+        width: 0;
+        height: 0;
+        border-left: 14px solid transparent; /* 控制三角形的大小 */
+        border-right: 14px solid transparent; /* 控制三角形的大小 */
+        border-bottom: 16px solid #000000; /* 控制三角形的大小和颜色 */
+      }
+      .broadcast:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+      }
+    }
+    .title {
+      width: 6vw;
+      height: 3vw;
+      line-height: 3vw;
+      font-size: 20px;
+      margin-left: 5px;
+    }
+  }
+  .main {
+    width: 100%;
+    .content {
+      width: 100%;
+      height: 15vw;
+      padding: 20px;
+      background: linear-gradient(
+        to right,
+        rgba(47, 79, 79, 0.8),
+        rgba(70, 130, 180, 0.8),
+        rgba(72, 61, 139, 0.8)
+      );
+      background-image: linear-gradient(
+        to bottom,
+        rgba(47, 79, 79, 0.8),
+        rgba(72, 61, 139, 0.8)
+      );
+      background-size: 300% 300%;
+      animation: colorShift 15s ease infinite;
+      display: flex;
+    }
+
+    .img {
+      width: 250px;
+      height: 250px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .text {
+      //   width: 300px;
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      margin-left: 40px;
+      align-items: start;
+      line-height: 0px;
+
+      h5 {
+        margin-top: 20px;
+        font-size: 14px;
+        height: 20px;
+      }
+      h1 {
+        font-size: 100px;
+        height: 140px;
+        line-height: 140px;
+      }
+      h2 {
+        font-size: 17px;
+        height: 50px;
+        line-height: 50px;
+        font-weight: 300;
+      }
+      h4 {
+        font-size: 14px;
+        height: 40px;
+        line-height: 30px;
+      }
+    }
+  }
+}
