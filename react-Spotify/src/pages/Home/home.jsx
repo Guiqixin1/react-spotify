@@ -447,7 +447,7 @@ const Home = () => {
       </Layout>
 
       <div>
-        <MusicPlayer accessToken={accessToken} />
+        <MusicPlayer theme="auto" />
       </div>
     </Flex>
   );

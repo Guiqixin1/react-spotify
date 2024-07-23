@@ -8,11 +8,12 @@
     height: 3vw;
     background-color: #5e5d5d;
     display: flex;
+
     position: sticky;
     top: 0%;
     left: 0%;
     .arrow {
-      width: 5vw;
+      // width: 5vw;
       height: 3vw;
       line-height: 3vw;
       font-size: 18px;
@@ -51,7 +52,7 @@
       }
     }
     .title {
-      width: 6vw;
+      // width: 6vw;
       height: 3vw;
       line-height: 3vw;
       font-size: 20px;
@@ -60,6 +61,7 @@
   }
   .main {
     width: 100%;
+    height: auto;
     .content {
       width: 100%;
       height: 15vw;
@@ -78,45 +80,111 @@
       background-size: 300% 300%;
       animation: colorShift 15s ease infinite;
       display: flex;
-    }
+      .img {
+        width: 13vw;
+        height: 13vw;
+        justify-content: center;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .text {
+        //   width: 300px;
+        height: 10vw;
+        display: flex;
+        flex-direction: column;
+        margin-left: 40px;
+        align-items: start;
+        justify-content: start;
+        line-height: 0px;
 
-    .img {
-      width: 250px;
-      height: 250px;
-      img {
-        width: 100%;
-        height: 100%;
+        h5 {
+          margin-top: 20px;
+          font-size: 14px;
+          height: 1px;
+        }
+        h1 {
+          font-size: 100px;
+          height: 6vw;
+          line-height: 6vw;
+        }
+        h2 {
+          font-size: 17px;
+          height: 4vw;
+          line-height: 4vw;
+          font-weight: 300;
+        }
+        h4 {
+          font-size: 14px;
+          height: 2.5vw;
+          line-height: 2.5vw;
+        }
       }
     }
-    .text {
-      //   width: 300px;
-      height: 250px;
+    .middle {
+      width: 100%;
+      height: 5vw;
       display: flex;
-      flex-direction: column;
-      margin-left: 40px;
-      align-items: start;
-      line-height: 0px;
+      align-items: center;
+      background: linear-gradient(
+        to bottom,
+        rgba(56, 64, 71, 0.5),
+        rgba(36, 40, 45, 0.7)
+      );
+      .btn {
+        position: relative;
+        width: 100%;
+        height: 4vw;
+        margin-left: 2vw;
+        display: flex;
+        align-items: center;
 
-      h5 {
-        margin-top: 20px;
-        font-size: 14px;
-        height: 20px;
+        .broadcast {
+          width: 3vw;
+          height: 3vw;
+          border-radius: 50%;
+          background-color: rgb(15, 219, 15);
+          position: relative;
+          margin-top: 0.25vw;
+          margin-right: 1vw;
+        }
+        .broadcast::after {
+          content: '';
+          position: absolute;
+          top: 50%; /* 控制三角形的位置 */
+          left: 50%; /* 控制三角形的位置 */
+          transform: translate(-50%, -50%) rotate(90deg);
+          width: 0;
+          height: 0;
+          border-left: 14px solid transparent; /* 控制三角形的大小 */
+          border-right: 14px solid transparent; /* 控制三角形的大小 */
+          border-bottom: 16px solid #000000; /* 控制三角形的大小和颜色 */
+        }
+        .broadcast:hover {
+          transform: scale(1.1);
+          cursor: pointer;
+        }
+        .plus {
+          width: 4vw;
+        }
       }
-      h1 {
-        font-size: 100px;
-        height: 140px;
-        line-height: 140px;
-      }
-      h2 {
-        font-size: 17px;
-        height: 50px;
-        line-height: 50px;
-        font-weight: 300;
-      }
-      h4 {
-        font-size: 14px;
-        height: 40px;
-        line-height: 30px;
+    }
+    .list {
+      // background-color: rgb(27, 23, 23);
+      color: #fff;
+      ul {
+        color: #fff;
+        li {
+          height: 10vh;
+          display: flex;
+          align-items: center;
+          padding: 0.5vw 1vw;
+          font-size: 1vw;
+          &:hover {
+            background-color: rgb(44, 39, 39);
+          }
+        }
       }
     }
   }

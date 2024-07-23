@@ -1,25 +1,11 @@
 import React from 'react';
 import ReactJkMusicPlayer from 'react-jinke-music-player';
 import 'react-jinke-music-player/assets/index.css';
-
+import { useSelector } from 'react-redux';
+import { addAudioList } from '../store/modules/audioList';
 const MusicPlayer = () => {
-  const audioList = [
-    {
-      name: 'Song 1',
-      singer: 'Artist 1',
-      cover: 'song1.jpg',
-      musicSrc:
-        'https://p.scdn.co/mp3-preview/6eafa4293d2b35b2e75ffab5ec1bba8ec00d5082?cid=cfe923b2d660439caf2b557b21f31221'
-    }
-    // {
-    //   name: 'Song 2',
-    //   singer: 'Artist 2',
-    //   cover: 'song2.jpg',
-    //   musicSrc: 'song2.mp3'
-    // }
-    // Add more songs as needed
-  ];
-
+  const { audioLists } = useSelector(state => state.persistedAudioListReducer);
+  console.log(audioLists);
   const options = {
     // Configure player options
     theme: 'dark', // Use 'dark' or 'light' theme
@@ -29,10 +15,30 @@ const MusicPlayer = () => {
     remember: true,
     remover: true,
     seeked: true,
-    showProgressLoadBar: true
+    showProgressLoadBar: true,
+    loadAudioErrorPlayNext: true,
+    autoPlayInitLoadPlayList: true
   };
+  // // 当前播放音乐发生改变
+  // function onAudioPlayTrackChange(currentPlayId, audioLists, audioInfo) {
+  //   console.log(currentPlayId, audioLists, audioInfo);
+  // }
+  // // 播放列表发生变化
+  // function onAudioListsChange(currentPlayId, audioLists, audioInfo) {
+  //   logic(111);
+  //   console.log(currentPlayId, audioLists, audioInfo);
+  //   audioLists = audioLists.push({
+  //     cover: 'https://i.scdn.co/image/ab67616d0000b273ed71b8008aaa879622f8c3b5',
+  //     currentLyric: undefined,
+  //     currentTime: 0
+  //   });
+  // }
+  // // 当前音乐播放的函数
+  // function onAudioPlay(audioInfo) {
+  //   console.log(audioInfo);
+  // }
 
-  return <ReactJkMusicPlayer audioLists={audioList} {...options} />;
+  return <ReactJkMusicPlayer audioLists={audioLists} {...options} />;
 };
 
 export default MusicPlayer;

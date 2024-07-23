@@ -1,0 +1,31 @@
+.list-head {
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr 13fr 0.8fr;
+  align-items: center;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+
+  .one,
+  .two,
+  .three,
+  .four {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .one {
+    justify-self: center;
+  }
+
+  .four {
+    justify-self: end;
+
+    .clock-icon {
+      font-size: 16px;
+      color: #999;
+    }
+  }
+}

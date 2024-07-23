@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setToken } from '@/store/modules/user';
 import { message } from 'antd';
 const useAxiosInterceptor = () => {
+  // 拦截器标识
+  let hasShownErrorMessage = false;
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { token } = useSelector(state => state.persistedUseReducer);
@@ -39,11 +41,13 @@ const useAxiosInterceptor = () => {
     error => {
       // 对响应错误做点什么
       if (error.response && error.response.status === 401) {
-        dispatch(setToken(''));
-        // 弹出提醒用户重新登录的模态框
-        showLoginModal();
-        navigate('/login');
-        return;
+        if (!hasShownErrorMessage) {
+          dispatch(setToken(''));
+          // 弹出提醒用户重新登录的模态框
+          showLoginModal();
+          navigate('/login');
+          hasShownErrorMessage = true;
+        }
       }
       return Promise.reject(error);
     }
