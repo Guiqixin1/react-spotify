@@ -1,0 +1,121 @@
+.List-box {
+  width: 100%;
+  background-color: rgb(94, 94, 94);
+  .list-head {
+    width: 100%;
+    height: 3vw;
+    line-height: 3vw;
+    text-align: center;
+    color: rgba(181, 180, 180, 0.8); /* 灰色,透明度50% */
+    font-size: 0.8vw;
+
+    .one {
+      width: 5%;
+      float: left;
+    }
+    .tow {
+      width: 40%;
+      float: left;
+      text-align: left;
+    }
+    .three {
+      width: 38%;
+      float: left;
+      text-align: center;
+    }
+    .four {
+      width: 17%;
+      float: left;
+    }
+  }
+  .list-item {
+    width: 100%;
+    height: 4vw;
+    position: relative;
+    line-height: 3.8vw;
+
+    .order {
+      width: 5%;
+      float: left;
+      font-size: 1vw;
+    }
+    .list-image {
+      width: 10%;
+      float: left;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; // position: absolute;
+
+      img {
+        width: 4vw;
+        height: 3.5vw;
+      }
+    }
+    .title {
+      width: 35%;
+      float: left;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      line-height: 300%;
+      justify-content: center;
+      text-align: left;
+
+      .song-name {
+        font-size: 0.8vw;
+        height: 50%;
+        a {
+          color: aliceblue;
+        }
+      }
+
+      .singer-name {
+        height: 50%;
+        font-size: 0.8vw;
+        a {
+          color: rgba(181, 180, 180, 0.8); /* 灰色,透明度50% */
+        }
+      }
+    }
+    .name {
+      float: left;
+      width: 28%;
+      height: 100%;
+      a {
+        color: aliceblue;
+      }
+    }
+    .plus {
+      width: 10%;
+      float: left;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center; // position: absolute;
+      align-items: end;
+    }
+    .time {
+      width: 9%;
+      float: left;
+      text-align: center;
+      font-size: 0.9vw;
+      font-weight: 600;
+    }
+  }
+  .list-item:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+}
+.list-item::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.List-box::after {
+  content: '';
+  display: table;
+  clear: both;
+}

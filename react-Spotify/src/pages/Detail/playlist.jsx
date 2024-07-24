@@ -2,13 +2,12 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useApiClient } from '@/utils/api';
 import { LeftOutlined, RightOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, List, Avatar } from 'antd';
+import { Button } from 'antd';
 import { useDispatch } from 'react-redux';
 import { setCurrentAudio } from '@/store/modules/audioList.js';
 import img from '@/assets/img2.jpg';
 
-import ListHead from '@/components/ListHeade';
-// import InfiniteScroll from 'react-infinite-scroll-component';
+import MusicList from '@/components/MusicList';
 import './playlist.scss';
 const Playlist = () => {
   const { getRecommendationPlaylists } = useApiClient();
@@ -16,20 +15,30 @@ const Playlist = () => {
   // 从地址栏获取id
   const { id } = useParams();
   // 音乐列表的数据
-  let DataList = [];
-  const [Data, setData] = useState([]);
+
+  const [DataList, setDataList] = useState([]);
+
+  // 毫秒转为分钟的函数
+  function millisToMinutes(millis) {
+    const minutes = Math.floor(millis / 60000);
+    const seconds = ((millis % 60000) / 1000).toFixed(0);
+    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+  }
+  // 进入playlist页面获取数据
   async function getPlaylist() {
     const playlist = await getRecommendationPlaylists(id);
     console.log(playlist);
-    DataList = playlist.data.tracks.items.map(item => ({
-      image: item.track.album.images[0].url,
-      AlbumName: item.track.album.name,
-      ArtistName: item.track.artists[0].name,
-      date: item.track.album.release_date,
-      id: item.track.id
-    }));
-    console.log(DataList);
-    setData(DataList);
+    setDataList(
+      playlist?.data?.tracks?.items?.map(item => ({
+        image: item?.track?.album?.images?.[0]?.url || '',
+        AlbumName: item?.track?.album?.name || '',
+        ArtistName: item?.track?.artists?.[0]?.name || '',
+        time: millisToMinutes(item?.track?.duration_ms) || 0,
+        id: item?.track?.id || '',
+        AlbumId: item?.track?.album?.id || '',
+        ArtistId: item?.track?.artists?.[0]?.id || ''
+      })) || []
+    );
   }
   async function handelDispatch(id) {
     const res = await getRecommendationPlaylists(id);
@@ -45,8 +54,9 @@ const Playlist = () => {
   }
   useEffect(() => {
     getPlaylist();
+    console.log(DataList);
   }, []);
-
+  console.log(DataList);
   return (
     <div className="Playlist">
       <div className="head">
@@ -85,31 +95,8 @@ const Playlist = () => {
             </div>
           </div>
         </div>
-        <div className="list">
-          {/* <InfiniteScroll> */}
-          {/* <List
-            header={<ListHead />}
-            dataSource={Data}
-            gutter={11}
-            column={3}
-            renderItem={(item, index) => (
-              <List.Item className='ListItem'>
-                <List.Item.Meta
-                  avatar={<Avatar src={item.image} />}
-                  title={item.AlbumName}
-                  description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                />
-              </List.Item>
-            )}
-          /> */}
-          {/* </InfiniteScroll> */}
-          <ul>
-            <li className="head">
-              <ListHead />
-            </li>
-            <li>111</li>
-          </ul>
-        </div>
+
+        <MusicList DataList={DataList} />
       </div>
     </div>
   );
