@@ -1,17 +1,15 @@
 .Playlist {
   width: 100%;
-  height: 90vh;
-  background-color: #3d3d3d;
-
+  position: relative;
   .head {
     width: 100%;
     height: 3vw;
-    background-color: #5e5d5d;
-    display: flex;
-
+    background-color: #726d6d;
     position: sticky;
     top: 0%;
     left: 0%;
+    display: flex;
+    z-index: 100;
     .arrow {
       // width: 5vw;
       height: 3vw;
@@ -25,31 +23,39 @@
       height: 3vw;
       margin-left: 6px;
       box-sizing: border-box;
-      //   display: none;
-      .broadcast {
+      .paused {
         width: 2.5vw;
         height: 2.5vw;
-        border-radius: 50%;
-        background-color: rgb(15, 219, 15);
-        position: relative;
-        margin-top: 0.25vw;
-      }
-      .broadcast::after {
-        content: '';
         position: absolute;
-        top: 50%; /* 控制三角形的位置 */
-        left: 50%; /* 控制三角形的位置 */
-        transform: translate(-50%, -50%) rotate(90deg);
-        width: 0;
-        height: 0;
-        border-left: 14px solid transparent; /* 控制三角形的大小 */
-        border-right: 14px solid transparent; /* 控制三角形的大小 */
-        border-bottom: 16px solid #000000; /* 控制三角形的大小和颜色 */
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
       }
-      .broadcast:hover {
-        transform: scale(1.1);
-        cursor: pointer;
-      }
+      //   display: none;
+      // .broadcast {
+      //   width: 2.5vw;
+      //   height: 2.5vw;
+      //   border-radius: 50%;
+      //   background-color: rgb(15, 219, 15);
+      //   position: relative;
+      //   margin-top: 0.25vw;
+      // }
+      // .broadcast::after {
+      //   content: '';
+      //   position: absolute;
+      //   top: 50%; /* 控制三角形的位置 */
+      //   left: 50%; /* 控制三角形的位置 */
+      //   transform: translate(-50%, -50%) rotate(90deg);
+      //   width: 0;
+      //   height: 0;
+      //   border-left: 14px solid transparent; /* 控制三角形的大小 */
+      //   border-right: 14px solid transparent; /* 控制三角形的大小 */
+      //   border-bottom: 16px solid #000000; /* 控制三角形的大小和颜色 */
+      // }
+      // .broadcast:hover {
+      //   transform: scale(1.1);
+      //   cursor: pointer;
+      // }
     }
     .title {
       // width: 6vw;
@@ -61,7 +67,6 @@
   }
   .main {
     width: 100%;
-    height: auto;
     .content {
       width: 100%;
       height: 15vw;
@@ -127,6 +132,7 @@
       height: 5vw;
       display: flex;
       align-items: center;
+
       background: linear-gradient(
         to bottom,
         rgba(56, 64, 71, 0.5),
@@ -139,53 +145,48 @@
         margin-left: 2vw;
         display: flex;
         align-items: center;
-
-        .broadcast {
+        position: relative;
+        .paused {
           width: 3vw;
           height: 3vw;
-          border-radius: 50%;
-          background-color: rgb(15, 219, 15);
-          position: relative;
-          margin-top: 0.25vw;
-          margin-right: 1vw;
-        }
-        .broadcast::after {
-          content: '';
           position: absolute;
-          top: 50%; /* 控制三角形的位置 */
-          left: 50%; /* 控制三角形的位置 */
-          transform: translate(-50%, -50%) rotate(90deg);
-          width: 0;
-          height: 0;
-          border-left: 14px solid transparent; /* 控制三角形的大小 */
-          border-right: 14px solid transparent; /* 控制三角形的大小 */
-          border-bottom: 16px solid #000000; /* 控制三角形的大小和颜色 */
+          left: 0px;
         }
-        .broadcast:hover {
-          transform: scale(1.1);
-          cursor: pointer;
-        }
+        // .broadcast {
+        //   width: 3vw;
+        //   height: 3vw;
+        //   border-radius: 50%;
+        //   background-color: rgb(15, 219, 15);
+        //   position: relative;
+        //   margin-top: 0.25vw;
+        //   margin-right: 1vw;
+        // }
+        // .broadcast::after {
+        //   content: '';
+        //   position: absolute;
+        //   top: 50%; /* 控制三角形的位置 */
+        //   left: 50%; /* 控制三角形的位置 */
+        //   transform: translate(-50%, -50%) rotate(90deg);
+        //   width: 0;
+        //   height: 0;
+        //   border-left: 14px solid transparent; /* 控制三角形的大小 */
+        //   border-right: 14px solid transparent; /* 控制三角形的大小 */
+        //   border-bottom: 16px solid #000000; /* 控制三角形的大小和颜色 */
+        // }
+        // .broadcast:hover {
+        //   transform: scale(1.1);
+        //   cursor: pointer;
+        // }
         .plus {
           width: 4vw;
+          position: absolute;
+          left: 3vw;
         }
       }
     }
     .list {
-      // background-color: rgb(27, 23, 23);
       color: #fff;
-      ul {
-        color: #fff;
-        li {
-          height: 10vh;
-          display: flex;
-          align-items: center;
-          padding: 0.5vw 1vw;
-          font-size: 1vw;
-          &:hover {
-            background-color: rgb(44, 39, 39);
-          }
-        }
-      }
+      z-index: 50;
     }
   }
 }

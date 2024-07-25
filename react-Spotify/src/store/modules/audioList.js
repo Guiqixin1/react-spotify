@@ -5,7 +5,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const audioListStore = createSlice({
   name: 'audioList',
   initialState: {
-    audioLists: []
+    audioLists: [],
+    playIndex: 0
   },
   // 同步修改方法
   reducers: {
@@ -14,11 +15,15 @@ const audioListStore = createSlice({
     },
     setCurrentAudio(state, action) {
       state.audioLists = action.payload;
+    },
+    setPlayIndex(state, action) {
+      state.playIndex = action.payload;
     }
   }
 });
 // 解构出actionCreater
-export const { addAudioList, setCurrentAudio } = audioListStore.actions;
+export const { addAudioList, setCurrentAudio, setPlayIndex } =
+  audioListStore.actions;
 
 // 获取reducer函数
 const audioListReducer = audioListStore.reducer;

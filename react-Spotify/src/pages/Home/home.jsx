@@ -60,8 +60,8 @@ import { useApiClient } from '../../utils/api.jsx';
 import MusicCard from '../../components/MusicCard';
 // 引入音乐播放器
 import MusicPlayer from '../../components/MusicPlayer';
-// 引入detail
-import Detail from '@/pages/Detail/detail.jsx';
+import { MusicPlayerProvider } from '@/components/context/MusicPlayerContext';
+
 import { Route, Routes } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 
@@ -97,106 +97,200 @@ const Home = () => {
 
   return (
     <Flex gap="middle">
-      <Layout className="layoutStyle" style={layoutStyle}>
-        <Sider width="21%" style={siderStyle}>
-          <div className="top">
-            <Row>
-              <Col className="TopCol" span={24}>
-                <SpotifyFilled />
-                <span>Spority</span>
-              </Col>
-              <Col className="TopCol" span={24}>
-                <BankFilled />
-                <span>Home</span>
-              </Col>
-              <Col className="TopCol" span={24}>
-                <SearchOutlined />
-                <span>Search</span>
-              </Col>
-            </Row>
-          </div>
-          <div className="bottom">
-            <div className="card">
-              <Row gutter={[32, 24]}>
-                <Col className="bottomCol" span={2}>
-                  <img src={stack} alt="" />
-                </Col>
-                <Col className="bottomCol" span={12}>
-                  <span>Your Libary</span>
-                </Col>
-                <Col className="bottomCol" span={8}>
-                  <img className="plus" src={plus} alt="" />
-                  <img src={arrow} alt="" />
-                </Col>
-              </Row>
+      <MusicPlayerProvider>
+        <Layout className="layoutStyle" style={layoutStyle}>
+          <Sider width="21%" style={siderStyle}>
+            <div className="top">
               <Row>
-                <div className="Playlists">
-                  {!ifPlayList && (
-                    <button
-                      className="PlaylistsBtn"
-                      onClick={() => setIfPlayLists(true)}
-                    >
-                      Playlists
-                    </button>
-                  )}
-                  {ifPlayList && (
-                    <div className="fullPlayList">
-                      <button
-                        className="close"
-                        onClick={() => setIfPlayLists(false)}
-                      >
-                        X
-                      </button>
-                      <button className="PlaylistsBtn">Playlists</button>
-                      <button className="PlaylistsBtn">By you</button>
-                    </div>
-                  )}
-                </div>
-              </Row>
-              <Row>
-                <div className="Recents">
-                  <Col>
-                    <div className="search">
-                      <input
-                        type="text"
-                        placeholder="Search in Your Library"
-                        ref={inputRef}
-                      />
-                      <img
-                        src={Search}
-                        onClick={handleInput}
-                        alt=""
-                        title="Search in Your Library"
-                      />
-                      <button className="searchBtn">
-                        <span>Recents</span>
-                        <img className="queue" src={queue} alt="" />
-                      </button>
-                    </div>
-                  </Col>
-                </div>
-              </Row>
-              <Row>
-                <Card
-                  bordered={false}
-                  style={{
-                    width: '100%',
-                    marginTop: 24,
-                    backgroundColor: '#242424',
-                    color: '#FFF',
-                    borderRadius: 8
-                  }}
-                >
-                  <p className="title">建立你的第一个播放清单</p>
-                  <p style={{ fontSize: 18 }}>这很简单，我们会帮你</p>
-                  <button className="btn">建立播放清单</button>
-                </Card>
+                <Col className="TopCol" span={24}>
+                  <SpotifyFilled />
+                  <span>Spority</span>
+                </Col>
+                <Col className="TopCol" span={24}>
+                  <BankFilled />
+                  <span>Home</span>
+                </Col>
+                <Col className="TopCol" span={24}>
+                  <SearchOutlined />
+                  <span>Search</span>
+                </Col>
               </Row>
             </div>
-          </div>
-        </Sider>
+            <div className="bottom">
+              <div className="card">
+                <Row gutter={[32, 24]}>
+                  <Col className="bottomCol" span={2}>
+                    <img src={stack} alt="" />
+                  </Col>
+                  <Col className="bottomCol" span={12}>
+                    <span>Your Libary</span>
+                  </Col>
+                  <Col className="bottomCol" span={8}>
+                    <img className="plus" src={plus} alt="" />
+                    <img src={arrow} alt="" />
+                  </Col>
+                </Row>
+                <Row>
+                  <div className="Playlists">
+                    {!ifPlayList && (
+                      <button
+                        className="PlaylistsBtn"
+                        onClick={() => setIfPlayLists(true)}
+                      >
+                        Playlists
+                      </button>
+                    )}
+                    {ifPlayList && (
+                      <div className="fullPlayList">
+                        <button
+                          className="close"
+                          onClick={() => setIfPlayLists(false)}
+                        >
+                          X
+                        </button>
+                        <button className="PlaylistsBtn">Playlists</button>
+                        <button className="PlaylistsBtn">By you</button>
+                      </div>
+                    )}
+                  </div>
+                </Row>
+                <Row>
+                  <div className="Recents">
+                    <Col>
+                      <div className="search">
+                        <input
+                          type="text"
+                          placeholder="Search in Your Library"
+                          ref={inputRef}
+                        />
+                        <img
+                          src={Search}
+                          onClick={handleInput}
+                          alt=""
+                          title="Search in Your Library"
+                        />
+                        <button className="searchBtn">
+                          <span>Recents</span>
+                          <img className="queue" src={queue} alt="" />
+                        </button>
+                      </div>
+                    </Col>
+                  </div>
+                </Row>
+                <Row>
+                  <Card
+                    bordered={false}
+                    style={{
+                      width: '100%',
+                      marginTop: 24,
+                      backgroundColor: '#242424',
+                      color: '#FFF',
+                      borderRadius: 8
+                    }}
+                  >
+                    <p className="title">建立你的第一个播放清单</p>
+                    <p style={{ fontSize: 18 }}>这很简单，我们会帮你</p>
+                    <button className="btn">建立播放清单</button>
+                  </Card>
+                </Row>
+              </div>
+            </div>
+          </Sider>
 
-        {/* <Layout>
+          <Content style={contentStyle}>
+            <Outlet />
+          </Content>
+          <Sider width="21%" style={siderStyle}>
+            <div className="rightNav">
+              <div className="header">
+                <div className="title">
+                  <h1>spotifssssssssssssssssssssssssssssssy</h1>
+                  <div className="close">
+                    <CloseCircleFilled />
+                  </div>
+                </div>
+              </div>
+              <div className="main">
+                <div className="ablum">
+                  <MusicCard
+                    url={img}
+                    title={'每日推荐'}
+                    description={'sdashjdiosahdioashdiohasidhssas'}
+                  ></MusicCard>
+                  <div className="plus">
+                    <Button
+                      type="dashed"
+                      shape="circle"
+                      icon={
+                        checked ? <CheckOutlined /> : <PlusCircleOutlined />
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="artist">
+                  <MusicCard
+                    url={img}
+                    title={'每日推荐'}
+                    description={'sdashjdiosahdioashdiohasidhssas'}
+                  ></MusicCard>
+                  <div className="plus">
+                    <Button
+                      type="dashed"
+                      shape="circle"
+                      icon={
+                        checked ? <CheckOutlined /> : <PlusCircleOutlined />
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="playlist">
+                  <Card
+                    style={{
+                      width: '21vw',
+                      height: '150px',
+                      marginTop: '10px',
+                      backgroundColor: '#5d5d5d',
+                      boxSizing: 'border-box',
+                      border: 'none'
+                    }}
+                  >
+                    <div className="title">
+                      <h1>队列中的下一首歌</h1>
+                      <Button type="text" className="btn">
+                        打开队列
+                      </Button>
+                    </div>
+                    <div className="music">
+                      <Button
+                        type="text"
+                        icon={<CaretRightFilled />}
+                        shape="circle"
+                        className="btn"
+                      ></Button>
+                      <img src={img} className="music_img" alt="" />
+                      <div className="info">
+                        <h1 className="music_name">歌曲名称</h1>
+                        <h1 className="music_singer">歌手名称</h1>
+                      </div>
+                    </div>
+                  </Card>
+                </div>
+              </div>
+            </div>
+          </Sider>
+        </Layout>
+        <div>
+          <MusicPlayer />
+        </div>
+      </MusicPlayerProvider>
+    </Flex>
+  );
+};
+
+export default Home;
+
+{
+  /* <Layout>
           <Content style={contentStyle}>
             <div className="header">
               <HeaderNav
@@ -366,91 +460,5 @@ const Home = () => {
               </div>
             )}
           </Content>
-        </Layout> */}
-        <Content style={contentStyle}>
-          <Outlet />
-        </Content>
-        <Sider width="21%" style={siderStyle}>
-          <div className="rightNav">
-            <div className="header">
-              <div className="title">
-                <h1>spotifssssssssssssssssssssssssssssssy</h1>
-                <div className="close">
-                  <CloseCircleFilled />
-                </div>
-              </div>
-            </div>
-            <div className="main">
-              <div className="ablum">
-                <MusicCard
-                  url={img}
-                  title={'每日推荐'}
-                  description={'sdashjdiosahdioashdiohasidhssas'}
-                ></MusicCard>
-                <div className="plus">
-                  <Button
-                    type="dashed"
-                    shape="circle"
-                    icon={checked ? <CheckOutlined /> : <PlusCircleOutlined />}
-                  />
-                </div>
-              </div>
-              <div className="artist">
-                <MusicCard
-                  url={img}
-                  title={'每日推荐'}
-                  description={'sdashjdiosahdioashdiohasidhssas'}
-                ></MusicCard>
-                <div className="plus">
-                  <Button
-                    type="dashed"
-                    shape="circle"
-                    icon={checked ? <CheckOutlined /> : <PlusCircleOutlined />}
-                  />
-                </div>
-              </div>
-              <div className="playlist">
-                <Card
-                  style={{
-                    width: '21vw',
-                    height: '150px',
-                    marginTop: '10px',
-                    backgroundColor: '#5d5d5d',
-                    boxSizing: 'border-box',
-                    border: 'none'
-                  }}
-                >
-                  <div className="title">
-                    <h1>队列中的下一首歌</h1>
-                    <Button type="text" className="btn">
-                      打开队列
-                    </Button>
-                  </div>
-                  <div className="music">
-                    <Button
-                      type="text"
-                      icon={<CaretRightFilled />}
-                      shape="circle"
-                      className="btn"
-                    ></Button>
-                    <img src={img} className="music_img" alt="" />
-                    <div className="info">
-                      <h1 className="music_name">歌曲名称</h1>
-                      <h1 className="music_singer">歌手名称</h1>
-                    </div>
-                  </div>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </Sider>
-      </Layout>
-
-      <div>
-        <MusicPlayer theme="auto" />
-      </div>
-    </Flex>
-  );
-};
-
-export default Home;
+        </Layout> */
+}

@@ -23,8 +23,8 @@ export default function HeaderNav({ handleData, show, flag }) {
     zIndex: '100',
     position: 'absolute',
     top: '0',
-    left: '21vw',
-    boxSizing: 'border-box'
+    left: '21vw'
+    // boxSizing: 'border-box'
   };
 
   return (
