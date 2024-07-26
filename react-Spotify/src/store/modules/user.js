@@ -19,22 +19,4 @@ export const { setToken } = userStore.actions;
 // 获取reducer函数
 const useReducer = userStore.reducer;
 
-// // 异步方法 完成登录获取token
-// const fetchLogin = loginForm => {
-//   return async dispatch => {
-//     //1.发送异步请求
-//     const res = await loginAPI(loginForm); //2.提交同步action进行token存入
-//     dispatch(setToken(res.data.accessToken)); // return res
-//   };
-// };
-
-// // 注册
-// const fetchRegister = registerForm => {
-//   return async () => {
-//     await registerAPI(registerForm);
-//   };
-// };
-
-// export { fetchLogin, fetchRegister };
-
 export default useReducer;

@@ -29,6 +29,8 @@ const Playlist = () => {
   const [DataHeader, setDataHeader] = useState({});
   // store里面的音乐列表数据
   const { audioLists } = useSelector(state => state.persistedAudioListReducer);
+  // 播放信息
+  const { audioInfo } = useSelector(state => state.persistedAudioListReducer);
   // 毫秒转为分钟的函数
   function millisToMinutes(millis) {
     const minutes = Math.floor(millis / 60000);
@@ -71,18 +73,27 @@ const Playlist = () => {
     // 如果两个数组不相等，则需要提交新的音乐列表
     if (!compareMusciArray(audioListObj, audioLists)) {
       dispatch(setCurrentAudio(audioListObj));
-      console.log(111);
     }
-    setIfPlay(!ifPlay);
-    console.log(ifPlay);
-    musicPlayerRef.current.play();
+    musicPlayerRef.current.onTogglePlay();
+    setIfPaused(audioInfo.paused);
     console.log(musicPlayerRef);
   }
 
   // 暂停音乐的函数
   function handlePauseMusic() {
-    musicPlayerRef.current.pause();
-    console.log('暂停' + musicPlayerRef);
+    // musicPlayerRef.current.pause();
+    // musicPlayerRef.current.audioPrevAndNextBasePlayHandle(true);
+    // console.log(musicPlayerRef);
+    // console.log(musicPlayerRef.current.getCurrentPlayIndex());
+    // onPlayNextAudio
+    // onPlayPrevAudio
+    // onTogglePlay
+    // playByIndex
+    // musicPlayerRef.current.playByIndex(10);
+    // musicPlayerRef.current.onAudioPause();
+    // 开始播放和暂停播放
+    musicPlayerRef.current.onTogglePlay();
+    setIfPaused(audioInfo.paused);
   }
   // 判断提交的音乐数组是否相等的函数
   function compareMusciArray(arr1, arr2) {
@@ -97,14 +108,20 @@ const Playlist = () => {
     return true;
   }
 
+  // 根据索引进行切歌
+  function handlePlayMusicByIndex(index) {
+    musicPlayerRef.current.playByIndex(index);
+  }
+
   useEffect(() => {
     getPlaylist();
-  }, [id]);
+    setIfPaused(audioInfo.paused);
+  }, [id, audioInfo.paused]);
 
   // 加载标识
   const [loading, setLoaing] = useState(true);
   // 是否播放的标识
-  const [ifPlay, setIfPlay] = useState(false);
+  const [ifPaused, setIfPaused] = useState(true);
 
   return (
     <>
@@ -118,7 +135,7 @@ const Playlist = () => {
               <Button type="text" shape="circle" icon={<RightOutlined />} />
             </div>
             <div className="btn">
-              {!ifPlay ? (
+              {ifPaused ? (
                 <Button
                   shape="circle"
                   type="primary"
@@ -155,7 +172,7 @@ const Playlist = () => {
             </div>
             <div className="middle">
               <div className="btn">
-                {!ifPlay ? (
+                {ifPaused ? (
                   <Button
                     shape="circle"
                     type="primary"
@@ -182,7 +199,7 @@ const Playlist = () => {
               </div>
             </div>
             <div className="list">
-              <MusicList DataList={DataList} />
+              <MusicList DataList={DataList} onClick={handlePlayMusicByIndex} />
             </div>
           </div>
         </div>

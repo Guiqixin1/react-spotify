@@ -6,7 +6,8 @@ const audioListStore = createSlice({
   name: 'audioList',
   initialState: {
     audioLists: [],
-    playIndex: 0
+    playIndex: 0,
+    audioInfo: {}
   },
   // 同步修改方法
   reducers: {
@@ -18,11 +19,14 @@ const audioListStore = createSlice({
     },
     setPlayIndex(state, action) {
       state.playIndex = action.payload;
+    },
+    setAudioInfo(state, action) {
+      state.audioInfo = action.payload;
     }
   }
 });
 // 解构出actionCreater
-export const { addAudioList, setCurrentAudio, setPlayIndex } =
+export const { addAudioList, setCurrentAudio, setPlayIndex, setAudioInfo } =
   audioListStore.actions;
 
 // 获取reducer函数

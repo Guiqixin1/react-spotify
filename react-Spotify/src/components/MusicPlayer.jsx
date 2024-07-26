@@ -43,7 +43,8 @@
 import React, { useRef, useState, useEffect, useContext } from 'react';
 import ReactJkMusicPlayer from 'react-jinke-music-player';
 import 'react-jinke-music-player/assets/index.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setAudioInfo } from '../store/modules/audioList';
 // 导入MusicPlayerContext
 import { MusicPlayerContext } from '@/components/context/MusicPlayerContext.jsx';
 const MusicPlayer = () => {
@@ -54,12 +55,14 @@ const MusicPlayer = () => {
   );
   const [MusicPlayerList, setMusicPlayerList] = useState([]);
   const [MusicPlayerIndex, setMusicPlayerIndex] = useState(0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setMusicPlayerList(audioLists);
     setMusicPlayerIndex(playIndex);
     musciPlayerRef.current = playerRef.current;
     console.log(playerRef.current);
+    console.log(playIndex);
   }, [audioLists, playIndex]);
   const options = {
     // Configure player options
@@ -74,15 +77,26 @@ const MusicPlayer = () => {
     showPlay: true,
     autoPlayInitLoadPlayList: false,
     clearPriorAudioLists: true,
-    autoPlay: false,
     preload: true
   };
+  function onAudioPlay(audioInfo) {
+    console.log('开始播放', audioInfo);
+    const filterAudioInfo = { ...audioInfo, played: {} };
+    dispatch(setAudioInfo(filterAudioInfo));
+  }
+  function onAudioPause(audioInfo) {
+    console.log('暂停播放', audioInfo);
+    const filterAudioInfo = { ...audioInfo, played: {} };
+    dispatch(setAudioInfo(filterAudioInfo));
+  }
   return (
     <ReactJkMusicPlayer
       ref={playerRef}
       audioLists={MusicPlayerList}
       {...options}
-      playIndex={MusicPlayerIndex}
+      // playIndex={MusicPlayerIndex}
+      onAudioPlay={onAudioPlay}
+      onAudioPause={onAudioPause}
     />
   );
 };

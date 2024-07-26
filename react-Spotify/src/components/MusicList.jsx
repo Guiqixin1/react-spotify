@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setPlayIndex } from '../store/modules/audioList';
-const ListHead = ({ DataList }) => {
+const ListHead = ({ DataList, onClick }) => {
   const [HoveredIndex, setHoveredIndex] = useState(-1);
   const dispatch = useDispatch();
   const handleMouseEnter = index => {
@@ -18,11 +18,6 @@ const ListHead = ({ DataList }) => {
 
   const handleMouseLeave = () => {
     setHoveredIndex(-1);
-  };
-  // 音乐播放
-  const onAudioPlay = index => {
-    dispatch(setPlayIndex(index));
-    // console.log(index);
   };
 
   return (
@@ -43,7 +38,7 @@ const ListHead = ({ DataList }) => {
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={handleMouseLeave}
           >
-            <div className="order" onClick={() => onAudioPlay(index)}>
+            <div className="order" onClick={() => onClick(index)}>
               {HoveredIndex === index ? <CaretRightOutlined /> : `${index + 1}`}
             </div>
             <div className="list-image">

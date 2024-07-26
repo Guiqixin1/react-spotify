@@ -6,15 +6,18 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 // 持久化配置
-const persistConfig = { key: 'root', storage };
+const persistConfig = {
+  key: 'root',
+  storage,
+  version: 1,
+  whitelist: ['audioLists', 'token', 'audioInfo']
+};
 
-// 持久化 reducer
 const persistedUseReducer = persistReducer(persistConfig, useReducer);
 const persistedAudioListReducer = persistReducer(
   persistConfig,
   audioListReducer
 );
-
 const store = configureStore({
   reducer: { persistedUseReducer, persistedAudioListReducer },
   middleware: getDefaultMiddleware =>
