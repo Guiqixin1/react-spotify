@@ -31,7 +31,7 @@ const layoutStyle = {
 };
 
 import './index.scss';
-import HeaderNav from '@/components/HeaderNav.jsx';
+
 import { Flex, Layout, Col, Row, Card, Button } from 'antd';
 // 按需引入antd图标
 import {
@@ -52,8 +52,7 @@ import React from 'react';
 
 // 引入Effect在页面挂载后执行
 import { useEffect, useState, useRef } from 'react';
-// 引入useLocation
-import { useLocation } from 'react-router-dom';
+
 const { Sider, Content, Header } = Layout;
 // 引入api接口
 import { useApiClient } from '../../utils/api.jsx';
@@ -200,6 +199,7 @@ const Home = () => {
           <Content style={contentStyle}>
             <Outlet />
           </Content>
+          {/* 侧边栏 */}
           <Sider width="21%" style={siderStyle}>
             <div className="rightNav">
               <div className="header">

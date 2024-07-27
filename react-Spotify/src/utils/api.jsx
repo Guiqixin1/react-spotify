@@ -32,11 +32,21 @@ export function useApiClient() {
   const getRecommendationPlaylists = id => {
     return instance.get(`/playlists/${id}`);
   };
+  // 6. 获取单个曲目的相关信息
+  const getTrack = id => {
+    return instance.get(`/tracks/${id}`);
+  };
+  // 7. 获取单个艺术家
+  const getArtist = id => {
+    return instance.get(`/artists/${id}`);
+  };
   return {
     getSeveralArtists,
     getSeveralAlbums,
     getUserToptracks,
     getSeveralShows,
-    getRecommendationPlaylists
+    getRecommendationPlaylists,
+    getTrack,
+    getArtist
   };
 }

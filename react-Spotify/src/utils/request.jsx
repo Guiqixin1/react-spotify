@@ -8,7 +8,7 @@ const useAxiosInterceptor = () => {
   let hasShownErrorMessage = false;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { token } = useSelector(state => state.persistedUseReducer);
+  const { token } = useSelector(state => state.user);
   const instance = axios.create({
     baseURL: 'https://api.spotify.com/v1',
     timeout: 10000,

@@ -9,7 +9,7 @@ import Artist from '@/pages/Detail/artist.jsx';
 import Tracks from '@/pages/Detail/tracks.jsx';
 import { useSelector } from 'react-redux';
 const AppRouter = () => {
-  const { token } = useSelector(state => state.persistedUseReducer);
+  const { token } = useSelector(state => state.user);
   return (
     <Router>
       <Routes>

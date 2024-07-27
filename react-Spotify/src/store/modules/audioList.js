@@ -3,11 +3,12 @@ import { createSlice } from '@reduxjs/toolkit';
 // import { useApiClient } from '@/utils/api';
 
 const audioListStore = createSlice({
-  name: 'audioList',
+  name: 'audioLists',
   initialState: {
     audioLists: [],
     playIndex: 0,
-    audioInfo: {}
+    audioInfo: {},
+    trackInfo: {}
   },
   // 同步修改方法
   reducers: {
@@ -22,12 +23,20 @@ const audioListStore = createSlice({
     },
     setAudioInfo(state, action) {
       state.audioInfo = action.payload;
+    },
+    setTrackInfo(state, action) {
+      state.trackInfo = action.payload;
     }
   }
 });
 // 解构出actionCreater
-export const { addAudioList, setCurrentAudio, setPlayIndex, setAudioInfo } =
-  audioListStore.actions;
+export const {
+  addAudioList,
+  setCurrentAudio,
+  setPlayIndex,
+  setAudioInfo,
+  setTrackInfo
+} = audioListStore.actions;
 
 // 获取reducer函数
 const audioListReducer = audioListStore.reducer;
