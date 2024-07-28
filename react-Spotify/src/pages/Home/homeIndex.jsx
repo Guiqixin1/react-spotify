@@ -1,15 +1,15 @@
 import './index.scss';
 import HeaderNav from '@/components/HeaderNav.jsx';
-import { Flex, Layout } from 'antd';
+import { Layout } from 'antd';
 import { useEffect, useState } from 'react';
 // 引入useLocation
 import { useLocation, useNavigate } from 'react-router-dom';
-const { Content } = Layout;
 // 引入api接口
 import { useApiClient } from '../../utils/api.jsx';
 import MusicCard from '../../components/MusicCard';
 // 引入loading组件
 import Loading from '@/components/Loading';
+import { useSelector } from 'react-redux';
 
 const HomeIndex = () => {
   const location = useLocation();
@@ -89,6 +89,8 @@ const HomeIndex = () => {
       navigate(`/tracks/${id}`);
     }
   };
+  // 引入右侧音乐信息
+  const { trackInfo } = useSelector(state => state.audioLists);
 
   return (
     <>
@@ -100,7 +102,7 @@ const HomeIndex = () => {
             <HeaderNav
               handleData={handleData}
               show={show}
-              //   flag={showRightNav}
+              flag={trackInfo.display}
             ></HeaderNav>
           </div>
 

@@ -12,8 +12,8 @@ export default function HeaderNav({ handleData, show, flag }) {
   }
 
   const headerStyle = {
-    // width: flag ? '58vw' : '79vw',
-    width: '57vw',
+    width: flag ? '57vw' : '78vw',
+    // width: '57vw',
     height: '13vh',
     background: 'linear-gradient(to right, #666, #333)',
     display: 'flex',

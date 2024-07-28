@@ -44,18 +44,19 @@ const MusicPlayer = () => {
       // 根据曲目的id获取相关信息
       const res = await getTrack(audioInfo.id);
       const artistRes = await getArtist(res.data.artists[0].id);
-
       const AsideData = {
         TrackId: res.data.id,
         AlbumId: res.data.album.id,
         ArtistId: res.data.artists[0].id,
+        TrackName: res.data.name,
         AlbumName: res.data.album.name,
         ArtistName: res.data.artists[0].name,
         AlbumImage: res.data.album.images[0].url,
         ArtistImage: artistRes.data.images[0].url,
-        followers: artistRes.data.followers.total
-      };
+        followers: artistRes.data.followers.total,
 
+        display: true
+      };
       dispatch(setTrackInfo(AsideData));
     }
   }
@@ -68,7 +69,6 @@ const MusicPlayer = () => {
   function onAudioListsChange() {
     playerRef.current.playByIndex(0);
   }
-
   return (
     <ReactJkMusicPlayer
       ref={playerRef}

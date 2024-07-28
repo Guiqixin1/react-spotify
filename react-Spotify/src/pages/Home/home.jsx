@@ -13,13 +13,22 @@ const contentStyle = {
   boxSizing: 'border-box'
 };
 
-const siderStyle = {
+const siderStyle_left = {
   color: '#E1E1E1',
   backgroundColor: '#000000',
   overflow: 'hidden',
   height: '90vh',
   boxSizing: 'border-box',
   flexWrap: 'nowrap'
+};
+const siderStyle_right = {
+  color: '#E1E1E1',
+  backgroundColor: '#000000',
+  overflow: 'hidden',
+  height: '90vh',
+  boxSizing: 'border-box',
+  flexWrap: 'nowrap',
+  display: 'block'
 };
 
 const layoutStyle = {
@@ -29,10 +38,8 @@ const layoutStyle = {
   backgroundColor: '#000000',
   display: 'flex'
 };
-
 import './index.scss';
-
-import { Flex, Layout, Col, Row, Card, Button } from 'antd';
+import { Flex, Layout, Col, Row, Card, Button, Radio, message } from 'antd';
 // 按需引入antd图标
 import {
   SpotifyFilled,
@@ -53,7 +60,7 @@ import React from 'react';
 // 引入Effect在页面挂载后执行
 import { useEffect, useState, useRef } from 'react';
 
-const { Sider, Content, Header } = Layout;
+const { Sider, Content } = Layout;
 // 引入api接口
 import { useApiClient } from '../../utils/api.jsx';
 import MusicCard from '../../components/MusicCard';
@@ -61,19 +68,30 @@ import MusicCard from '../../components/MusicCard';
 import MusicPlayer from '../../components/MusicPlayer';
 import { MusicPlayerProvider } from '@/components/context/MusicPlayerContext';
 
-import { Route, Routes } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
-
-// 右侧样式照片
-import img from '@/assets/img5.jpg';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
+// 处理右侧side
+import { useSelector, useDispatch } from 'react-redux';
+// 引入trackInfo action
+import { setTrackInfo } from '@/store/modules/audioList';
 
 // 组件
 const Home = () => {
+  // 引入api
+  const {
+    CheckTrack,
+    RemoveTrack,
+    SaveTrack,
+    CheckFollowArtist,
+    UnFollowArtist,
+    FollowArtist
+  } = useApiClient();
   // 判断是否加入歌单
-  const [checked, setChecked] = useState(false);
-  let accessToken = '';
+  const [checkedTrack, setCheckedTrack] = useState(false);
+  // 判断是否关注
+  const [checkedArtist, setCheckedArtist] = useState(false);
   // playlists标识符;
   const [ifPlayList, setIfPlayLists] = useState(false);
+
   // 点击搜索图片出现输入款，进行在表单内的搜搜
   const inputRef = useRef(null);
   function handleInput() {
@@ -91,14 +109,73 @@ const Home = () => {
     }
   }
 
-  // 判断右侧导航是否出现的标识
-  const [showRightNav, setShowRightNav] = useState(false);
+  // 引入右侧音乐信息
+  const { trackInfo } = useSelector(state => state.audioLists);
+  const dispatch = useDispatch();
+
+  // // 判断右侧导航是否出现的标识
+  const [showRightNav, setShowRightNav] = useState(trackInfo?.display);
+  function handleCloseRightNav() {
+    setShowRightNav(false);
+    dispatch(setTrackInfo({ ...trackInfo, display: false }));
+  }
+  useEffect(() => {
+    if (trackInfo?.display) {
+      setShowRightNav(true);
+    }
+    checkSavedTrack(trackInfo?.TrackId);
+    checkSavedArtist(trackInfo?.ArtistId);
+  }, [trackInfo?.display, trackInfo?.TrackId]);
+  const navigate = useNavigate();
+  function handleArtist(id) {
+    navigate(`/artist/${id}`);
+  }
+  function handleAlbum(id) {
+    navigate(`/album/${id}`);
+  }
+  // 点击喜欢/取消喜欢按钮
+  async function handleSavedTrack(id) {
+    // 如果该曲目已经被点赞
+    if (checkedTrack) {
+      await RemoveTrack(id);
+      setCheckedTrack(false);
+      message.info('已从已点赞的歌曲中删除');
+    }
+    // 如果该曲目未被点赞
+    else {
+      await SaveTrack(id);
+      setCheckedTrack(true);
+      message.info('已添加到已点赞的歌曲');
+    }
+  }
+  // 点击关注/取消关注按钮
+  async function handleSavedArtist(id) {
+    if (checkedArtist) {
+      await UnFollowArtist(id);
+      setCheckedArtist(false);
+      message.info('已从音乐库中删除');
+    } else {
+      await FollowArtist(id);
+      setCheckedArtist(true);
+      message.info('已添加到音乐库');
+    }
+  }
+  // 检查单曲是否被收录
+  async function checkSavedTrack(id) {
+    const res = await CheckTrack(id);
+    setCheckedTrack(res.data[0]);
+  }
+  // 检查艺人是否被关注
+  async function checkSavedArtist(id) {
+    const res = await CheckFollowArtist(id);
+    setCheckedArtist(res.data[0]);
+  }
 
   return (
     <Flex gap="middle">
       <MusicPlayerProvider>
         <Layout className="layoutStyle" style={layoutStyle}>
-          <Sider width="21%" style={siderStyle}>
+          <Sider width="21%" style={siderStyle_left}>
             <div className="top">
               <Row>
                 <Col className="TopCol" span={24}>
@@ -200,50 +277,59 @@ const Home = () => {
             <Outlet />
           </Content>
           {/* 侧边栏 */}
-          <Sider width="21%" style={siderStyle}>
-            <div className="rightNav">
-              <div className="header">
-                <div className="title">
-                  <h1>spotifssssssssssssssssssssssssssssssy</h1>
-                  <div className="close">
-                    <CloseCircleFilled />
+          {showRightNav && (
+            <Sider width="21%" style={siderStyle_right}>
+              <div className="rightNav">
+                <div className="header">
+                  <div className="title">
+                    <Link to={`/album/${trackInfo.AlbumId}`}>
+                      {trackInfo.AlbumName}
+                    </Link>
+                    <div className="close" onClick={handleCloseRightNav}>
+                      <CloseCircleFilled />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="main">
-                <div className="ablum">
-                  <MusicCard
-                    url={img}
-                    title={'每日推荐'}
-                    description={'sdashjdiosahdioashdiohasidhssas'}
-                  ></MusicCard>
-                  <div className="plus">
-                    <Button
-                      type="dashed"
-                      shape="circle"
-                      icon={
-                        checked ? <CheckOutlined /> : <PlusCircleOutlined />
-                      }
-                    />
+                <div className="main">
+                  <div className="ablum">
+                    <MusicCard
+                      url={trackInfo.AlbumImage}
+                      title={trackInfo.TrackName}
+                      description={'关于艺人'}
+                      onClick={() => handleAlbum(trackInfo.AlbumId)}
+                    ></MusicCard>
+                    <div className="plus">
+                      <Button
+                        type="dashed"
+                        shape="circle"
+                        icon={
+                          checkedTrack ? (
+                            <CheckOutlined />
+                          ) : (
+                            <PlusCircleOutlined />
+                          )
+                        }
+                        onClick={() => handleSavedTrack(trackInfo.TrackId)}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="artist">
-                  <MusicCard
-                    url={img}
-                    title={'每日推荐'}
-                    description={'sdashjdiosahdioashdiohasidhssas'}
-                  ></MusicCard>
-                  <div className="plus">
-                    <Button
-                      type="dashed"
-                      shape="circle"
-                      icon={
-                        checked ? <CheckOutlined /> : <PlusCircleOutlined />
-                      }
-                    />
+                  <div className="artist">
+                    <MusicCard
+                      url={trackInfo.ArtistImage}
+                      title={trackInfo.ArtistName}
+                      description={`每月有${trackInfo.followers}名听众`}
+                      onClick={() => handleArtist(trackInfo.ArtistId)}
+                    ></MusicCard>
+                    <div className="plus">
+                      <Radio.Button
+                        value="default"
+                        onClick={() => handleSavedArtist(trackInfo.ArtistId)}
+                      >
+                        {checkedArtist ? '取消关注' : '关注'}
+                      </Radio.Button>
+                    </div>
                   </div>
-                </div>
-                <div className="playlist">
+                  {/* <div className="playlist">
                   <Card
                     style={{
                       width: '21vw',
@@ -274,10 +360,11 @@ const Home = () => {
                       </div>
                     </div>
                   </Card>
+                </div> */}
                 </div>
               </div>
-            </div>
-          </Sider>
+            </Sider>
+          )}
         </Layout>
         <div>
           <MusicPlayer />

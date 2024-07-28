@@ -40,6 +40,40 @@ export function useApiClient() {
   const getArtist = id => {
     return instance.get(`/artists/${id}`);
   };
+  // 8. 获取spotify中已点赞的单曲
+  const getUserSavedTracks = () => {
+    return instance.get(`/me/tracks`);
+  };
+  // 9. 将单曲添加到已点赞的音乐库中
+  const SaveTrack = id => {
+    return instance.put('/me/tracks', {
+      ids: [id]
+    });
+  };
+  // 10. 检查单曲是否在已点赞的音乐库中
+  const CheckTrack = id => {
+    return instance.get(`/me/tracks/contains?ids=${id}`);
+  };
+  // 11. 从已点赞的音乐库中删除单曲
+  const RemoveTrack = id => {
+    return instance.delete(`/me/tracks?ids=${id}`);
+  };
+  // 12. 获取用户关注的艺术家
+  const getUserFollowedArtists = () => {
+    return instance.get(`/me/following?type=artist`);
+  };
+  // 13. 取消关注该艺术家
+  const UnFollowArtist = id => {
+    return instance.delete(`/me/following?type=artist&ids=${id}`);
+  };
+  // 14. 关注该艺术家
+  const FollowArtist = id => {
+    return instance.put(`/me/following?type=artist&ids=${id}`);
+  };
+  // 15. 检查用户是否关注了该艺术家
+  const CheckFollowArtist = id => {
+    return instance.get(`/me/following/contains?type=artist&ids=${id}`);
+  };
   return {
     getSeveralArtists,
     getSeveralAlbums,
@@ -47,6 +81,14 @@ export function useApiClient() {
     getSeveralShows,
     getRecommendationPlaylists,
     getTrack,
-    getArtist
+    getArtist,
+    getUserSavedTracks,
+    SaveTrack,
+    CheckTrack,
+    RemoveTrack,
+    getUserFollowedArtists,
+    UnFollowArtist,
+    CheckFollowArtist,
+    FollowArtist
   };
 }
