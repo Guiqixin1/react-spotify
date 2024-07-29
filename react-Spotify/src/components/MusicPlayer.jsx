@@ -69,10 +69,11 @@ const MusicPlayer = () => {
   function onAudioListsChange() {
     playerRef.current.playByIndex(0);
   }
+
   return (
     <ReactJkMusicPlayer
       ref={playerRef}
-      audioLists={MusicPlayerList}
+      audioLists={audioLists}
       {...options}
       onAudioPlay={onAudioPlay}
       onAudioPause={onAudioPause}

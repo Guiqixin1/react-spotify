@@ -74,6 +74,18 @@ export function useApiClient() {
   const CheckFollowArtist = id => {
     return instance.get(`/me/following/contains?type=artist&ids=${id}`);
   };
+  // 16. 获取标有特定类别的播放列表
+  const getCategoryPlaylists = id => {
+    return instance.get(`/browse/categories/${id}/playlists`);
+  };
+  // 17. 获取浏览类别的卡片
+  const getBrowseCategories = () => {
+    return instance.get(`/browse/categories`);
+  };
+  // 18. 搜索获取数据
+  const getSearch = (query, type = 'track,artist,album,playlist,show') => {
+    return instance.get(`/search?q=${query}&type=${type}`);
+  };
   return {
     getSeveralArtists,
     getSeveralAlbums,
@@ -89,6 +101,9 @@ export function useApiClient() {
     getUserFollowedArtists,
     UnFollowArtist,
     CheckFollowArtist,
-    FollowArtist
+    FollowArtist,
+    getCategoryPlaylists,
+    getBrowseCategories,
+    getSearch
   };
 }

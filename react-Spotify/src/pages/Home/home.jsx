@@ -47,8 +47,7 @@ import {
   SearchOutlined,
   CloseCircleFilled,
   PlusCircleOutlined,
-  CheckOutlined,
-  CaretRightFilled
+  CheckOutlined
 } from '@ant-design/icons';
 import arrow from '@/assets/arrow.png';
 import stack from '@/assets/stack.png';
@@ -184,11 +183,16 @@ const Home = () => {
                 </Col>
                 <Col className="TopCol" span={24}>
                   <BankFilled />
-                  <span>Home</span>
+                  <Link to={'/'}>
+                    <span>Home</span>
+                  </Link>
                 </Col>
                 <Col className="TopCol" span={24}>
                   <SearchOutlined />
-                  <span>Search</span>
+                  {/* <span>Search</span> */}
+                  <Link to={'/search'}>
+                    <span>Search</span>
+                  </Link>
                 </Col>
               </Row>
             </div>
@@ -375,177 +379,3 @@ const Home = () => {
 };
 
 export default Home;
-
-{
-  /* <Layout>
-          <Content style={contentStyle}>
-            <div className="header">
-              <HeaderNav
-                handleData={handleData}
-                show={show}
-                flag={showRightNav}
-              ></HeaderNav>
-            </div>
-
-            {show === 'all' && (
-              <div className="container">
-                <div className="audiobook flexItem">
-                  <div className="title">
-                    <a className="h1">根据用户喜好推荐的曲目</a>
-                    <a className="showAll">展示全部</a>
-                  </div>
-                  {userTopTracks?.slice(0, 4).map(item => {
-                    return (
-                      <div className="item" key={item.id}>
-                        <MusicCard
-                          url={item.album.images[0].url}
-                          title={item.album.name}
-                          description={item.album.release_date}
-                          type={item.type}
-                        ></MusicCard>
-                        <div className="broadcast"></div>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="artists flexItem">
-                  <div className="title">
-                    <a className="h1">著名艺人</a>
-                    <a className="showAll">展示全部</a>
-                  </div>
-                  {artistsInfoArrary?.map(item => {
-                    return (
-                      <div className="item" key={item.id}>
-                        <MusicCard
-                          url={item.images[0].url}
-                          title={item.name}
-                          description={item.type}
-                          type={item.type}
-                        ></MusicCard>
-                        <div className="broadcast"></div>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="album flexItem">
-                  <div className="title">
-                    <a className="h1">热门专辑</a>
-                    <a className="showAll">展示全部</a>
-                  </div>
-                  {albumsInfoArrary?.map(item => {
-                    return (
-                      <div className="item" key={item.id}>
-                        <MusicCard
-                          url={item.images[0].url}
-                          title={item.name}
-                          description={item.label}
-                          type={item.type}
-                        ></MusicCard>
-                        <div className="broadcast"></div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <div className="simplifiedShow flexItem">
-                  <div className="title">
-                    <a className="h1">热门播客</a>
-                    <a className="showAll">展示全部</a>
-                  </div>
-                  {showsEpisodes?.slice(0, 4).map(item => {
-                    return (
-                      <div className="item" key={item.id}>
-                        <MusicCard
-                          url={item.images[0].url}
-                          title={item.name}
-                          description={item.publisher}
-                          type={item.type}
-                        ></MusicCard>
-                        <div className="broadcast"></div>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div className="playlist flexItem">
-                  <div className="title">
-                    <p className="h1">精选排行</p>
-                  </div>
-                  {hotPlayLists?.map(item => {
-                    return (
-                      <div className="item" key={item.id}>
-                        <MusicCard
-                          url={item.images[0].url}
-                          title={item.name}
-                          description={item.description}
-                          type={item.type}
-                        ></MusicCard>
-                        <div className="broadcast"></div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-            {show === 'music' && (
-              <div className="container">
-                <div className="audiobook flexItem">
-                  <div className="title">
-                    <p className="h1">热门音乐</p>
-                  </div>
-                  {userTopTracks?.map(item => {
-                    return (
-                      <div className="item" key={item.id}>
-                        <MusicCard
-                          url={item.album.images[0].url}
-                          title={item.album.name}
-                          description={item.album.release_date}
-                          type={item.type}
-                        ></MusicCard>
-                        <div className="broadcast"></div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <div className="album flexItem">
-                  {albumsInfoArrary?.map(item => {
-                    return (
-                      <div className="item" key={item.id}>
-                        <MusicCard
-                          url={item.images[0].url}
-                          title={item.name}
-                          description={item.label}
-                          type={item.type}
-                        ></MusicCard>
-                        <div className="broadcast"></div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-            {show === 'podcast' && (
-              <div className="container">
-                <div className="simplifiedShow flexItem">
-                  <div className="title">
-                    <p className="h1">热门播客</p>
-                  </div>
-                  {showsEpisodes?.map(item => {
-                    return (
-                      <div className="item" key={item.id}>
-                        <MusicCard
-                          url={item.images[0].url}
-                          title={item.name}
-                          description={item.publisher}
-                          type={item.type}
-                        ></MusicCard>
-                        <div className="broadcast"></div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </Content>
-        </Layout> */
-}

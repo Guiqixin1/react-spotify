@@ -1,0 +1,33 @@
+.categories {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  //   justify-content: space-between;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  //   margin: -0.5rem; /* 添加这行 */
+}
+
+.categories__item {
+  width: calc(25% - 1.5rem); /* 修改这行 */
+  height: 10vw;
+  position: relative;
+  cursor: pointer;
+  margin: 0.5rem; /* 添加这行 */
+}
+
+.categories__item-img {
+  width: 100%;
+  height: 100%;
+}
+
+.categories__item-title {
+  position: absolute;
+  top: -2vw;
+  left: 1vw;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #fff;
+  z-index: 99;
+}
