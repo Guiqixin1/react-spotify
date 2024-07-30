@@ -45,6 +45,9 @@ const Playlist = lazy(() => import('@/pages/Detail/playlist.jsx'));
 const Artist = lazy(() => import('@/pages/Detail/artist.jsx'));
 const Tracks = lazy(() => import('@/pages/Detail/tracks.jsx'));
 const Search = lazy(() => import('@/pages/Search/search.jsx'));
+const SearchResultsPage = lazy(
+  () => import('@/pages/Search/SearchResultsPage.jsx')
+);
 
 const AppRouter = () => {
   const { token } = useSelector(state => state.user);
@@ -115,8 +118,18 @@ const AppRouter = () => {
                 <Search />
               </Suspense>
             }
-          />
+          >
+            <Route
+              path=":searchQuery"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <SearchResultsPage />
+                </Suspense>
+              }
+            />
+          </Route>
         </Route>
+
         <Route
           path="/login"
           element={

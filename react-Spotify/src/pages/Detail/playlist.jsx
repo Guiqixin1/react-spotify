@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
 import { useApiClient } from '@/utils/api';
 import {
@@ -17,12 +17,14 @@ import Loading from '@/components/Loading';
 // 使用MusicPlayerContext获取音乐播放器的实例
 import { MusicPlayerContext } from '@/components/context/MusicPlayerContext.jsx';
 const Playlist = () => {
+  const navigate = useNavigate();
   const { getRecommendationPlaylists } = useApiClient();
   // 获取实例
   const musicPlayerRef = useContext(MusicPlayerContext);
   const dispatch = useDispatch();
   // 从地址栏获取id
   const { id } = useParams();
+
   // 音乐列表的数据
   const [DataList, setDataList] = useState([]);
   // 音乐头部的数据
@@ -40,6 +42,7 @@ const Playlist = () => {
   // 进入playlist页面获取数据
   async function getPlaylist() {
     const playlist = await getRecommendationPlaylists(id);
+    // console.log(playlist);
     setDataHeader({
       image: playlist?.data?.images?.[0]?.url || '',
       name: playlist?.data?.name || '',
@@ -60,6 +63,7 @@ const Playlist = () => {
     );
     setLoaing(false);
   }
+
   async function handelDispatch(id) {
     const res = await getRecommendationPlaylists(id);
     console.log(res);
@@ -74,14 +78,14 @@ const Playlist = () => {
     if (!compareMusciArray(audioListObj, audioLists)) {
       dispatch(setCurrentAudio(audioListObj));
     }
+    // setIfPaused(audioInfo.paused);
     musicPlayerRef.current.onTogglePlay();
-    setIfPaused(audioInfo.paused);
   }
 
   // 暂停音乐的函数
   function handlePauseMusic() {
     musicPlayerRef.current.onTogglePlay();
-    setIfPaused(audioInfo.paused);
+    // setIfPaused(audioInfo.paused);
   }
   // 判断提交的音乐数组是否相等的函数
   function compareMusciArray(arr1, arr2) {
@@ -116,8 +120,10 @@ const Playlist = () => {
 
   useEffect(() => {
     getPlaylist();
+  }, [id]);
+  useEffect(() => {
     setIfPaused(audioInfo.paused);
-  }, [id, audioInfo.paused]);
+  }, [audioInfo.paused]);
 
   // 加载标识
   const [loading, setLoaing] = useState(true);
@@ -132,8 +138,18 @@ const Playlist = () => {
         <div className="Playlist">
           <div className="head">
             <div className="arrow">
-              <Button type="text" shape="circle" icon={<LeftOutlined />} />
-              <Button type="text" shape="circle" icon={<RightOutlined />} />
+              <Button
+                type="text"
+                shape="circle"
+                icon={<LeftOutlined />}
+                onClick={() => navigate(-1)}
+              />
+              <Button
+                type="text"
+                shape="circle"
+                icon={<RightOutlined />}
+                onClick={() => navigate(1)}
+              />
             </div>
             <div className="btn">
               {ifPaused ? (
@@ -187,7 +203,7 @@ const Playlist = () => {
                     type="primary"
                     icon={<PauseOutlined />}
                     className="paused"
-                    onClick={() => handelDispatch(id)}
+                    onClick={() => handlePauseMusic()}
                   ></Button>
                 )}
                 <div className="plus">

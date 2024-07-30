@@ -2,16 +2,51 @@ import './MusicList.scss';
 import {
   ClockCircleOutlined,
   PlusCircleOutlined,
-  CaretRightOutlined
+  CaretRightOutlined,
+  CheckOutlined
 } from '@ant-design/icons';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { setPlayIndex } from '../store/modules/audioList';
+import { useState, useEffect } from 'react';
+import { useApiClient } from '@/utils/api';
 const ListHead = ({ DataList, onClick }) => {
+  const { CheckTrack, RemoveTrack, SaveTrack } = useApiClient();
   const [HoveredIndex, setHoveredIndex] = useState(-1);
-  const dispatch = useDispatch();
+  // 是否点赞的标识
+  const [checkedTrack, setCheckedTrack] = useState([]);
+  const ids = DataList.map(item => item.id).join(',');
+  const checkSavedTrack = async id => {
+    const res = await CheckTrack(id);
+    setCheckedTrack(res.data);
+  };
+  useEffect(() => {
+    checkSavedTrack(ids);
+  }, [DataList]);
+  // checkSavedTrack(ids);
+  // 点击喜欢/取消喜欢按钮
+  async function handleSavedTrack(id, index) {
+    // 如果该曲目已经被点赞
+    if (checkedTrack[index]) {
+      await RemoveTrack(id);
+      setCheckedTrack(prevTrack => {
+        const newTrack = [...prevTrack];
+        newTrack[index] = false;
+        return newTrack;
+      });
+      message.info('已从已点赞的歌曲中删除');
+    }
+    // 如果该曲目未被点赞
+    else {
+      await SaveTrack(id);
+      setCheckedTrack(prevTrack => {
+        const newTrack = [...prevTrack];
+        newTrack[index] = true;
+        return newTrack;
+      });
+      message.info('已添加到已点赞的歌曲');
+    }
+  }
+
   const handleMouseEnter = index => {
     setHoveredIndex(index);
   };
@@ -58,7 +93,14 @@ const ListHead = ({ DataList, onClick }) => {
             <div className="plus">
               <Button
                 type="text"
-                icon={<PlusCircleOutlined></PlusCircleOutlined>}
+                icon={
+                  checkedTrack[index] ? (
+                    <CheckOutlined />
+                  ) : (
+                    <PlusCircleOutlined />
+                  )
+                }
+                onClick={() => handleSavedTrack(item.id, index)}
               ></Button>
             </div>
             <div className="time">{item.time}</div>

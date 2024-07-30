@@ -1,4 +1,10 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useContext,
+  useCallback
+} from 'react';
 import ReactJkMusicPlayer from 'react-jinke-music-player';
 import 'react-jinke-music-player/assets/index.css';
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,11 +22,15 @@ const MusicPlayer = () => {
   const [MusicPlayerList, setMusicPlayerList] = useState([]);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setMusicPlayerList(audioLists);
+  // 使用useCallback将PlayerRef给缓存了
+  const memoizedPlayerRef = useCallback(() => {
     musciPlayerRef.current = playerRef.current;
     console.log(musciPlayerRef.current);
-  }, [audioLists]);
+  }, []);
+  useEffect(() => {
+    setMusicPlayerList(audioLists);
+    memoizedPlayerRef();
+  }, [memoizedPlayerRef]);
   const options = {
     // Configure player options
     theme: 'dark',

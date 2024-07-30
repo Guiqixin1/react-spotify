@@ -26,9 +26,151 @@
       margin-left: 2vw;
     }
   }
-  .h1 {
-    text-align: left;
-    margin-left: 2vw;
-    font-size: 1.5vw;
+  .main {
+    box-sizing: border-box;
+    .content {
+      width: 100%;
+      height: 100%;
+      .flexItem {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        .title {
+          width: 100%;
+          height: 4vw;
+          position: relative;
+          margin-bottom: 0.5vw;
+          .h1 {
+            width: 50%;
+            position: absolute;
+            top: 0;
+            left: 1vw;
+            height: 100%;
+            text-align: left;
+            font-size: 20px;
+            font-weight: 900;
+            cursor: pointer;
+            color: #fff;
+          }
+          .showAll {
+            width: 50%;
+            position: absolute;
+            top: 0;
+            right: 2vw;
+            height: 100%;
+            text-align: right;
+            font-size: 13px;
+            font-weight: 600;
+            color: #a7a7a7;
+            cursor: pointer;
+          }
+        }
+        .item {
+          width: 25%;
+          height: 30vh;
+          padding: 1vw;
+          box-sizing: border-box;
+          position: relative;
+          .box {
+            width: 100%;
+            height: 120%;
+            .music-card {
+              width: 100%;
+              height: 100%;
+              display: block;
+              position: relative;
+
+              cursor: pointer;
+              .music-card__image {
+                width: 100%;
+                height: 70%;
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                object-fit: cover;
+              }
+              .music-card__info {
+                width: 100%;
+                height: 30%;
+                position: absolute;
+                top: 73%;
+                left: 0;
+                padding: 5px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                .music-card__title,
+                .music-card__description {
+                  position: absolute;
+                  left: 0;
+                  display: block;
+                  line-height: 30%;
+                }
+                .music-card__title {
+                  font-size: 16px;
+                  font-weight: 600;
+                  color: #ffffff;
+                  top: 10%;
+                  height: 30%;
+                }
+
+                .music-card__description {
+                  color: #c7c7c7;
+                  font-size: 14px;
+                  font-weight: 400;
+                  top: 35%;
+                  line-height: 100%;
+                  height: 50%;
+                  text-align: left;
+                  white-space: wrap;
+                }
+              }
+            }
+          }
+        }
+        .item {
+          position: relative;
+          .broadcast {
+            width: 2.5vw;
+            height: 2.5vw;
+            position: absolute;
+            bottom: 4vw;
+            right: 2vw;
+            border-radius: 50%;
+            background-color: #00ff6e;
+            display: none;
+          }
+          .broadcast::after {
+            content: '';
+            position: absolute;
+            top: 50%; /* 控制三角形的位置 */
+            left: 50%; /* 控制三角形的位置 */
+            transform: translate(-50%, -50%) rotate(90deg);
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent; /* 控制三角形的大小 */
+            border-right: 12px solid transparent; /* 控制三角形的大小 */
+            border-bottom: 14px solid #000000; /* 控制三角形的大小和颜色 */
+          }
+          .broadcast:hover {
+            transform: scale(1.2);
+            cursor: pointer;
+          }
+        }
+        .item:hover {
+          .broadcast {
+            display: block;
+          }
+        }
+        .item:hover::before {
+          display: block;
+        }
+      }
+    }
   }
 }

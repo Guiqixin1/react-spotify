@@ -46,9 +46,7 @@ export function useApiClient() {
   };
   // 9. 将单曲添加到已点赞的音乐库中
   const SaveTrack = id => {
-    return instance.put('/me/tracks', {
-      ids: [id]
-    });
+    return instance.put(`/me/tracks?ids=${id}`);
   };
   // 10. 检查单曲是否在已点赞的音乐库中
   const CheckTrack = id => {

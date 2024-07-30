@@ -6,13 +6,29 @@ import { useEffect, useState } from 'react';
 import { useApiClient } from '../../utils/api.jsx';
 // 无限滚动组件
 import useInfiScroll from '../../components/useInfiScroll.jsx';
+
+import { useNavigate, Outlet, useParams } from 'react-router-dom';
+// 引入loadsh内的防抖函数
+import { debounce } from 'lodash';
 const Search = () => {
+  const { searchQuery } = useParams();
+  const navigate = useNavigate();
   const { getBrowseCategories } = useApiClient();
   const [categoriesList, setCategoriesList] = useState([]);
   const [setNext, lastRef] = useInfiScroll(setCategoriesList, 'categories');
-  function handleSearch(value) {
-    console.log(value);
-  }
+  const [ifInput, setIfInput] = useState();
+  const [InputValue, setInputValue] = useState('');
+  // 输入框内容发生变化就触发
+  const handleSearch = debounce(value => {
+    if (value.length > 0) {
+      setIfInput(true);
+      setInputValue(value);
+    } else {
+      setIfInput(false);
+      setInputValue('');
+    }
+    navigate(`/search/${value}`);
+  }, 100);
   // 一进页面就获取数据
   async function getData() {
     const res = await getBrowseCategories();
@@ -22,19 +38,35 @@ const Search = () => {
   }
   useEffect(() => {
     getData();
+    console.log(searchQuery);
+    setInputValue(searchQuery);
+    if (searchQuery !== '') {
+      setIfInput(true);
+    } else {
+      setIfInput(false);
+    }
   }, []);
+
   return (
     <div className="search">
       <div className="header">
         <div className="nav">
           <div className="nav__left">
             <Tooltip title="后退">
-              <Button shape="circle" icon={<LeftOutlined />} />
+              <Button
+                shape="circle"
+                icon={<LeftOutlined />}
+                onClick={() => navigate(-1)}
+              />
             </Tooltip>
           </div>
           <div className="nav__right">
             <Tooltip title="前进">
-              <Button shape="circle" icon={<RightOutlined />} />
+              <Button
+                shape="circle"
+                icon={<RightOutlined />}
+                onClick={() => navigate(1)}
+              />
             </Tooltip>
           </div>
         </div>
@@ -44,12 +76,17 @@ const Search = () => {
             prefix={<SearchOutlined />}
             placeholder="想播放什么"
             onChange={e => handleSearch(e.target.value)}
+            value={InputValue}
           />
         </div>
       </div>
-      <h1 className="h1">浏览全部</h1>
+
       <div className="main">
-        <Categories categoriesList={categoriesList} lastRef={lastRef} />
+        {!ifInput ? (
+          <Categories categoriesList={categoriesList} lastRef={lastRef} />
+        ) : (
+          <Outlet></Outlet>
+        )}
       </div>
     </div>
   );
