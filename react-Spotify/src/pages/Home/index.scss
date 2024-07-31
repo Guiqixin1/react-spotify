@@ -244,43 +244,43 @@
             }
           }
         }
-        .item {
-          position: relative;
-          .broadcast {
-            width: 2.5vw;
-            height: 2.5vw;
-            position: absolute;
-            bottom: 4vw;
-            right: 2vw;
-            border-radius: 50%;
-            background-color: #00ff6e;
-            display: none;
-          }
-          .broadcast::after {
-            content: '';
-            position: absolute;
-            top: 50%; /* 控制三角形的位置 */
-            left: 50%; /* 控制三角形的位置 */
-            transform: translate(-50%, -50%) rotate(90deg);
-            width: 0;
-            height: 0;
-            border-left: 12px solid transparent; /* 控制三角形的大小 */
-            border-right: 12px solid transparent; /* 控制三角形的大小 */
-            border-bottom: 14px solid #000000; /* 控制三角形的大小和颜色 */
-          }
-          .broadcast:hover {
-            transform: scale(1.2);
-            cursor: pointer;
-          }
-        }
-        .item:hover {
-          .broadcast {
-            display: block;
-          }
-        }
-        .item:hover::before {
-          display: block;
-        }
+        // .item {
+        //   position: relative;
+        //   .broadcast {
+        //     width: 2.5vw;
+        //     height: 2.5vw;
+        //     position: absolute;
+        //     bottom: 4vw;
+        //     right: 2vw;
+        //     border-radius: 50%;
+        //     background-color: #00ff6e;
+        //     display: none;
+        //   }
+        //   .broadcast::after {
+        //     content: '';
+        //     position: absolute;
+        //     top: 50%; /* 控制三角形的位置 */
+        //     left: 50%; /* 控制三角形的位置 */
+        //     transform: translate(-50%, -50%) rotate(90deg);
+        //     width: 0;
+        //     height: 0;
+        //     border-left: 12px solid transparent; /* 控制三角形的大小 */
+        //     border-right: 12px solid transparent; /* 控制三角形的大小 */
+        //     border-bottom: 14px solid #000000; /* 控制三角形的大小和颜色 */
+        //   }
+        //   .broadcast:hover {
+        //     transform: scale(1.2);
+        //     cursor: pointer;
+        //   }
+        // }
+        // .item:hover {
+        //   .broadcast {
+        //     display: block;
+        //   }
+        // }
+        // .item:hover::before {
+        //   display: block;
+        // }
       }
     }
   }

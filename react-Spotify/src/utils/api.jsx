@@ -84,6 +84,16 @@ export function useApiClient() {
   const getSearch = (query, type = 'track,artist,album,playlist,show') => {
     return instance.get(`/search?q=${query}&type=${type}`);
   };
+  // 19. 根据曲目推荐歌曲
+  const getRecommendationsTrack = (artistId, trackId) => {
+    return instance.get(
+      `/recommendations?seed_artists=${artistId}&seed_tracks=${trackId}`
+    );
+  };
+  // 20. 获取艺人的最火歌曲
+  const getArtistTopTrack = id => {
+    return instance.get(`/artists/${id}/top-track`);
+  };
   return {
     getSeveralArtists,
     getSeveralAlbums,
@@ -102,6 +112,8 @@ export function useApiClient() {
     FollowArtist,
     getCategoryPlaylists,
     getBrowseCategories,
-    getSearch
+    getSearch,
+    getRecommendationsTrack,
+    getArtistTopTrack
   };
 }

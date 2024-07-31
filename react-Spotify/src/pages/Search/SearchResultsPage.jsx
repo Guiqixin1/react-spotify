@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 // 引入音乐组件
 import MusicCard from '../../components/MusicCard.jsx';
 import { useApiClient } from '../../utils/api.jsx';
+import { Empty } from 'antd';
 const SearchResultsPage = () => {
   const navigate = useNavigate();
   const { getSearch } = useApiClient();
@@ -50,7 +51,7 @@ const SearchResultsPage = () => {
             <div className="title">
               <a className="h1">Track</a>
             </div>
-            {TrackList?.items?.slice(0, 4).map(item => {
+            {TrackList?.items?.slice(0, 8).map(item => {
               return (
                 <div className="item" key={item.id}>
                   <MusicCard
@@ -70,7 +71,7 @@ const SearchResultsPage = () => {
             <div className="title">
               <a className="h1">Artist</a>
             </div>
-            {artistsList?.items?.slice(0, 4).map(item => {
+            {artistsList?.items?.slice(0, 8).map(item => {
               return (
                 <div className="item" key={item.id}>
                   <MusicCard
@@ -90,7 +91,7 @@ const SearchResultsPage = () => {
             <div className="title">
               <a className="h1">Album</a>
             </div>
-            {albumsList?.items?.slice(0, 4).map(item => {
+            {albumsList?.items?.slice(0, 8).map(item => {
               return (
                 <div
                   className="item"
@@ -109,13 +110,12 @@ const SearchResultsPage = () => {
             })}
           </div>
         )}
-
         {showsList?.items?.length > 0 && (
           <div className="simplifiedShow flexItem">
             <div className="title">
               <a className="h1">Shows</a>
             </div>
-            {showsList?.items?.slice(0, 4).map(item => {
+            {showsList?.items?.slice(0, 8).map(item => {
               return (
                 <div className="item" key={item.id}>
                   <MusicCard
@@ -135,7 +135,7 @@ const SearchResultsPage = () => {
             <div className="title">
               <p className="h1">PlayLists</p>
             </div>
-            {playList?.items?.slice(0, 4).map(item => {
+            {playList?.items?.slice(0, 8).map(item => {
               return (
                 <div className="item" key={item.id}>
                   <MusicCard
@@ -150,6 +150,7 @@ const SearchResultsPage = () => {
             })}
           </div>
         )}
+        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
       </div>
     </div>
   );

@@ -1,0 +1,191 @@
+.Track {
+  width: 100%;
+  position: relative;
+  .head {
+    width: 100%;
+    height: 3vw;
+    background-color: #726d6d;
+    position: sticky;
+    top: 0%;
+    left: 0%;
+    display: flex;
+    z-index: 100;
+    .arrow {
+      // width: 5vw;
+      height: 3vw;
+      line-height: 3vw;
+      font-size: 18px;
+      margin-left: 20px;
+    }
+    .btn {
+      position: relative;
+      width: 3vw;
+      height: 3vw;
+      margin-left: 6px;
+      box-sizing: border-box;
+      .paused {
+        width: 2.5vw;
+        height: 2.5vw;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+      }
+    }
+    .title {
+      // width: 6vw;
+      height: 3vw;
+      line-height: 3vw;
+      font-size: 20px;
+      margin-left: 5px;
+    }
+  }
+  .main {
+    width: 100%;
+    .content {
+      width: 100%;
+      height: 15vw;
+      padding: 20px;
+      background: linear-gradient(
+        to right,
+        rgba(47, 79, 79, 0.8),
+        rgba(70, 130, 180, 0.8),
+        rgba(72, 61, 139, 0.8)
+      );
+      background-image: linear-gradient(
+        to bottom,
+        rgba(47, 79, 79, 0.8),
+        rgba(72, 61, 139, 0.8)
+      );
+      background-size: 300% 300%;
+      animation: colorShift 15s ease infinite;
+      display: flex;
+      .img {
+        width: 13vw;
+        height: 13vw;
+        justify-content: center;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .text {
+        //   width: 300px;
+        height: 10vw;
+        display: flex;
+        flex-direction: column;
+        margin-left: 40px;
+        align-items: start;
+        justify-content: start;
+        line-height: 40px;
+        margin-top: 20px;
+
+        h5 {
+          margin-top: 20px;
+          font-size: 14px;
+          height: 1px;
+        }
+        h1 {
+          font-size: 80px;
+          height: 6vw;
+          line-height: 6vw;
+          margin-top: 30px;
+        }
+        .descript {
+          //   width: 40vw;
+          height: 40px;
+          display: flex;
+          font-size: 1vw;
+          .artistImg {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+          }
+          .artistName {
+            margin-left: 1vw;
+            font-weight: bold;
+          }
+          .albumName {
+            margin-left: 1vw;
+            font-weight: bold;
+          }
+          .descript {
+            margin-left: 1vw;
+          }
+        }
+      }
+    }
+    .middle {
+      width: 100%;
+      height: 5vw;
+      display: flex;
+      align-items: center;
+
+      background: linear-gradient(
+        to bottom,
+        rgba(56, 64, 71, 0.5),
+        rgba(36, 40, 45, 0.7)
+      );
+      .btn {
+        position: relative;
+        width: 100%;
+        height: 4vw;
+        margin-left: 2vw;
+        display: flex;
+        align-items: center;
+        position: relative;
+        .paused {
+          width: 3vw;
+          height: 3vw;
+          position: absolute;
+          left: 0px;
+        }
+        .plus {
+          width: 4vw;
+          position: absolute;
+          left: 3vw;
+        }
+      }
+    }
+    .artist {
+      width: 100%;
+      height: 100px;
+      background: linear-gradient(
+        to bottom,
+        rgba(56, 64, 71, 0.5),
+        rgba(36, 40, 45, 0.7)
+      );
+      box-sizing: border-box;
+      display: flex;
+      img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-left: 1vw;
+      }
+      .name {
+        height: 100px;
+        max-height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        line-height: 200%;
+        font-size: 16px;
+        margin-left: 0.5vw;
+      }
+      .title {
+        margin-left: 40vw;
+        font-size: 18px;
+        text-align: right;
+      }
+    }
+    .artist:hover {
+      background-color: #726d6d;
+    }
+    .list {
+      color: #fff;
+      z-index: 50;
+    }
+  }
+}

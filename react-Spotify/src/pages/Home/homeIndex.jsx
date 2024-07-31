@@ -123,7 +123,6 @@ const HomeIndex = () => {
                           description={item.album.release_date}
                           onClick={() => handleDetail(item.id, item.type)}
                         ></MusicCard>
-                        <div className="broadcast"></div>
                       </div>
                     );
                   })}
@@ -142,7 +141,6 @@ const HomeIndex = () => {
                           description={item.type}
                           onClick={() => handleDetail(item.id, item.type)}
                         ></MusicCard>
-                        <div className="broadcast"></div>
                       </div>
                     );
                   })}
@@ -165,7 +163,6 @@ const HomeIndex = () => {
                           description={item.label}
                           onClick={() => handleDetail(item.id, item.type)}
                         ></MusicCard>
-                        <div className="broadcast"></div>
                       </div>
                     );
                   })}
@@ -185,7 +182,6 @@ const HomeIndex = () => {
                           description={item.publisher}
                           onClick={() => handleDetail(item.id, item.type)}
                         ></MusicCard>
-                        <div className="broadcast"></div>
                       </div>
                     );
                   })}
@@ -203,7 +199,6 @@ const HomeIndex = () => {
                           description={item.description}
                           onClick={() => handleDetail(item.id, item.type)}
                         ></MusicCard>
-                        <div className="broadcast"></div>
                       </div>
                     );
                   })}
@@ -225,7 +220,6 @@ const HomeIndex = () => {
                           description={item.album.release_date}
                           onClick={() => handleDetail(item.id, item.type)}
                         ></MusicCard>
-                        <div className="broadcast"></div>
                       </div>
                     );
                   })}
@@ -241,7 +235,6 @@ const HomeIndex = () => {
                           description={item.label}
                           onClick={() => handleDetail(item.id, item.type)}
                         ></MusicCard>
-                        <div className="broadcast"></div>
                       </div>
                     );
                   })}
@@ -263,7 +256,6 @@ const HomeIndex = () => {
                           description={item.publisher}
                           onClick={() => handleDetail(item.id, item.type)}
                         ></MusicCard>
-                        <div className="broadcast"></div>
                       </div>
                     );
                   })}

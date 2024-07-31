@@ -22,28 +22,23 @@ const Search = () => {
   const handleSearch = debounce(value => {
     if (value.length > 0) {
       setIfInput(true);
-      setInputValue(value);
     } else {
       setIfInput(false);
-      setInputValue('');
     }
     navigate(`/search/${value}`);
-  }, 100);
+  });
   // 一进页面就获取数据
   async function getData() {
     const res = await getBrowseCategories();
-    // console.log(res.data);
     setCategoriesList(res.data.categories.items);
     setNext(res.data.categories.next);
   }
   useEffect(() => {
     getData();
-    console.log(searchQuery);
-    setInputValue(searchQuery);
-    if (searchQuery !== '') {
-      setIfInput(true);
-    } else {
+    if (!searchQuery) {
       setIfInput(false);
+    } else {
+      setIfInput(true);
     }
   }, []);
 
@@ -56,7 +51,7 @@ const Search = () => {
               <Button
                 shape="circle"
                 icon={<LeftOutlined />}
-                onClick={() => navigate(-1)}
+                onClick={() => navigate('/')}
               />
             </Tooltip>
           </div>
@@ -76,7 +71,6 @@ const Search = () => {
             prefix={<SearchOutlined />}
             placeholder="想播放什么"
             onChange={e => handleSearch(e.target.value)}
-            value={InputValue}
           />
         </div>
       </div>

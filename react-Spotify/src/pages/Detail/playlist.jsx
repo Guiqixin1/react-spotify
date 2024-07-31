@@ -42,7 +42,7 @@ const Playlist = () => {
   // 进入playlist页面获取数据
   async function getPlaylist() {
     const playlist = await getRecommendationPlaylists(id);
-    // console.log(playlist);
+    console.log(playlist);
     setDataHeader({
       image: playlist?.data?.images?.[0]?.url || '',
       name: playlist?.data?.name || '',
@@ -58,7 +58,8 @@ const Playlist = () => {
         time: millisToMinutes(item?.track?.duration_ms) || 0,
         id: item?.track?.id || '',
         AlbumId: item?.track?.album?.id || '',
-        ArtistId: item?.track?.artists?.[0]?.id || ''
+        ArtistId: item?.track?.artists?.[0]?.id || '',
+        TrackName: item?.track?.name || ''
       })) || []
     );
     setLoaing(false);

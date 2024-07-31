@@ -54,7 +54,6 @@ const ListHead = ({ DataList, onClick }) => {
   const handleMouseLeave = () => {
     setHoveredIndex(-1);
   };
-
   return (
     <ul className="List-box">
       <li className="list-head">
@@ -81,7 +80,7 @@ const ListHead = ({ DataList, onClick }) => {
             </div>
             <div className="title">
               <div className="song-name">
-                <Link to={`/album/${item.AlbumId}`}>{item.AlbumName}</Link>
+                <Link to={`/tracks/${item.id}`}>{item.TrackName}</Link>
               </div>
               <div className="singer-name">
                 <Link to={`/artist/${item.ArtistId}`}> {item.ArtistName}</Link>
